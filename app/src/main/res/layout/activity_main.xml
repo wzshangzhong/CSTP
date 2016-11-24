@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    tools:context=".activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--头-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#348FCE"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/iv_mine_home"
+                android:layout_width="44dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/home_mine_menu" />
+
+            <TextView
+                android:id="@+id/tv_title_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/iv_mine_home"
+                android:layout_centerHorizontal="true"
+                android:text="长沙交警"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+        </RelativeLayout>
+        <!--广告-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="144dp"
+            android:background="@drawable/home_cstp_bg">
+
+            <TextView
+                android:id="@+id/tv_time_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_date_home"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="36dp"
+                android:layout_marginStart="36dp"
+                android:text="11:00:41"
+                android:textColor="@android:color/white"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_date_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_time_home"
+                android:layout_alignStart="@+id/tv_time_home"
+                android:layout_centerVertical="true"
+                android:text="11月1日 星期二"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/tv_weather_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/tv_date_home"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="37dp"
+                android:layout_marginRight="37dp"
+                android:text="阵雨转阴  17℃-10℃"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_air_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="空气质量：优"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_below="@id/tv_weather_home"
+                android:layout_alignRight="@id/tv_weather_home"
+                android:layout_alignEnd="@id/tv_weather_home" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:text="平安出行"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textSize="24sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#ddd" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_content_home"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="#ddd" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_bulletin" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <include layout="@layout/item_bulletin" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@android:color/darker_gray" />
+
+                <include layout="@layout/item_bulletin" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:background="@android:color/darker_gray" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <!-- 左侧抽屉-->
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nv_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header" />
+</android.support.v4.widget.DrawerLayout>

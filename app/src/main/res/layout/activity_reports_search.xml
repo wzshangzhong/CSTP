@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_gray"
+    android:orientation="vertical"
+    tools:context="com.android.wen.cstp.activity.ReportsSearchActivity">
+
+    <!--按照时间查，按照违法地点查询，
+    按照违法事件查询，按照违法车辆查询
+    按照号牌查询-->
+    <include layout="@layout/common_top" />
+
+    <TextView
+        style="@style/top_text"
+        android:text="请至少填写一项" />
+
+    <LinearLayout
+        style="@style/linear_common"
+        android:background="@color/white">
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                android:id="@id/textView2"
+                style="@style/relate_item_text"
+                android:text="违法车辆号牌号码" />
+
+            <EditText
+                android:id="@+id/et_hphm_search"
+                style="@style/relate_text_right"
+                android:layout_width="100dp"
+                android:background="@color/transparent"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="输入号牌号码"
+                android:maxLength="5"
+                android:singleLine="true" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@+id/et_hphm_report"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_fzjg_search"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="湘"
+                    android:textColor="@color/black_light"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_hpzl_search"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="A"
+                    android:textColor="@color/black_light"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/more" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                style="@style/relate_item_text"
+                android:text="违法行为" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/more" />
+
+            <TextView
+                android:id="@+id/tv_wfxw_search"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/imageView4"
+                android:gravity="center|right"
+                android:text="故意遮挡机动车号牌"
+                android:textColor="@color/black_light"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                android:id="@+id/textView6"
+                style="@style/relate_item_text"
+                android:text="违法时间" />
+
+
+            <TextView
+                android:id="@+id/tv_time_search"
+                style="@style/relate_text_right"
+                android:layout_width="200dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/imageView6"
+                android:gravity="center|right"
+                android:text="2016/11/02~2016/11/02"
+                android:textColor="@color/black_light"
+                android:textSize="14sp" />
+
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/more" />
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                style="@style/relate_item_text"
+                android:text="违法地点" />
+
+            <TextView
+                android:id="@+id/tv_place_search"
+                style="@style/relate_text_right"
+                android:layout_width="200dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/imageView5"
+                android:gravity="center|right"
+                android:text="湖南省长沙市岳麓区平川路"
+                android:textColor="@color/black_light"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/more" />
+
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/relate_item_text"
+                android:text="车辆类型" />
+
+            <ImageView
+                android:id="@id/imageView"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:src="@drawable/more" />
+
+            <TextView
+                android:id="@+id/tv_cllx_search"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/imageView"
+                android:gravity="center|right"
+                android:text="小型汽车"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:textColor="@color/black_light"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+
+        <RelativeLayout style="@style/relate_common_item">
+
+            <TextView
+                style="@style/relate_item_text"
+                android:text="车身颜色" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="10.0dip"
+                android:layout_height="10.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5.0dip"
+                android:src="@drawable/more" />
+
+            <TextView
+                android:id="@+id/tv_csys_search"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/imageView3"
+                android:gravity="center|right"
+                android:text="白色"
+                android:textColor="@color/black_light"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <View style="@style/item_view" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_search"
+        style="@style/business_submit"
+        android:text="查 询" />
+
+</LinearLayout>

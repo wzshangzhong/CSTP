@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--举报信息详情页面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ItemReportActivity">
+
+    <TextView
+        android:id="@+id/tv_wfcp_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="湘A12354"
+        android:textSize="32sp" />
+
+    <TextView
+        android:id="@+id/tv_wfdz_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="违法地址:平川路"
+        android:textSize="24sp" />
+
+    <TextView
+    android:id="@+id/tv_qksm_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:text="情况说明:"
+    android:textSize="24sp" />
+    <TextView
+        android:id="@+id/tv_wfsj_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="违法时间:"
+        android:textSize="24sp" />
+    <TextView
+        android:id="@+id/tv_wfbm_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="违法编码:"
+        android:textSize="24sp" />
+    <ImageView
+        android:id="@+id/image0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/image3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

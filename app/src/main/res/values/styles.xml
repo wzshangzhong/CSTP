@@ -1,0 +1,130 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+<!--违法举报的滚动样式-->
+    <style name="scrollview_common">
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <!--也是违法举报-->
+    <style name="linear_common">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="relate_common_item">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+
+    <style name="relate_item_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="relate_text_right">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center|right</item>
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="item_view">
+        <item name="android:background">@color/back_gray</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1.0px</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="top_text">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/top_text_gray</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+<!--提交按钮-->
+    <style name="business_submit">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_business_submit</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+    <!--获取验证码按钮-->
+    <style name="business_code">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/bg_business_submit</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+    <style name="Theme.picker" parent="android:Theme.Holo.Dialog">
+        <item name="android:editTextStyle">@style/Widget.EditText.White</item>
+    </style>
+    <style name="Widget.EditText.White" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/color_black</item>
+    </style>
+    <!--//抽屉的样式-->
+    <style name="slidingmenu_relative">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+    <style name="slidingmenu_icon">
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">15dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="slidingmenu_text">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="jiantou">
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_width">8dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:src">@drawable/c_cate_list_menur</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+    <style name="slidingmenu_line">
+        <item name="android:background">#ffaaaaaa</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+</resources>

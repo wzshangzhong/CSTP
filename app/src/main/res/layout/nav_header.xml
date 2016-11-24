@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_leftmenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/slidingbg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        <!-- 显示当前用户的图标和用户名-->
+        <ImageView
+            android:id="@+id/image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="72dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="Username"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/categoryLists"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="50dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="25dp">
+
+            <!--举报记录-->
+            <RelativeLayout
+                android:id="@+id/rl_report_nh"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_jifen"
+                    style="@style/slidingmenu_icon"
+                    android:src="@drawable/l_sliding_shoucang" />
+
+                <TextView
+                    android:id="@+id/tv_report_nh"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_jifen"
+                    android:text="举报记录" />
+
+                <ImageView style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_jifen" />
+            </RelativeLayout>
+            <!--违法记录-->
+            <RelativeLayout
+                android:id="@+id/rl_inquire_nh"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_jilu"
+                    style="@style/slidingmenu_icon"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/l_sliding_jilu" />
+
+                <TextView
+                    android:id="@+id/tv_inquire_nh"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_jilu"
+                    android:text="违法记录" />
+
+                <ImageView style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_jilu" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/label_share"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_share"
+                    style="@style/slidingmenu_icon"
+                    android:src="@drawable/l_sliding_share" />
+
+                <TextView
+                    android:id="@+id/text_share"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_share"
+                    android:text="软件分享" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_share" />
+            </RelativeLayout>
+            <!--检查更新-->
+            <RelativeLayout
+                android:id="@+id/rl_checkupdate_nh"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_checkupdate"
+                    style="@style/slidingmenu_icon"
+                    android:src="@drawable/l_sliding_update" />
+
+                <TextView
+                    android:id="@+id/text_checkupdate"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_checkupdate"
+                    android:text="检查更新" />
+
+                <ImageView style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_checkupdate" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_loginout_nh"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_loginout"
+                    style="@style/slidingmenu_icon"
+                    android:src="@drawable/l_sliding_loginout" />
+
+                <TextView
+                    android:id="@+id/text_loginout"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_loginout"
+                    android:text="退出登录" />
+
+                <ImageView
+                    android:id="@+id/dot_loginout"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/jiantou_loginout"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/news"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@id/jiantou_loginout"
+                    style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_loginout" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

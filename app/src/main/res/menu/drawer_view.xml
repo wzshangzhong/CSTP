@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Home"/>
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@mipmap/ic_launcher"
+            android:title="News"/>
+
+        <item
+            android:id="@+id/nav_tech"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Tech"/>
+        <item
+            android:id="@+id/nav_game"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Game"/>
+    </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:icon="@mipmap/ic_launcher"
+                android:title="QR"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@mipmap/ic_launcher"
+                android:title="关于"/>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/diwen_bg_tiled_black"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_version_new"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/diwen_bg_tiled_black"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_ver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:textColor="#ff505050"
+                android:textSize="15sp"
+                android:text="版本V1.1"/>
+
+            <Button
+                android:id="@+id/user_help"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_ver"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20.0dip"
+                android:background="@drawable/bg_setting_layout_userinfo"
+                android:text="最新版本（or点击更新）"
+                android:textColor="#ff8087a1"
+                android:textSize="20sp" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10.0dip"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

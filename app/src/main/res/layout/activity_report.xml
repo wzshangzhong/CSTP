@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffebebeb"
+    android:orientation="vertical"
+    tools:context=".activity.ReportActivity">
+
+    <include layout="@layout/common_top" />
+
+    <ScrollView style="@style/scrollview_common">
+
+        <LinearLayout
+            style="@style/linear_common"
+            android:background="@color/white">
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    android:id="@id/textView2"
+                    style="@style/relate_item_text"
+                    android:text="违法车辆号牌号码" />
+
+                <EditText
+                    android:id="@+id/et_hphm_report"
+                    style="@style/relate_text_right"
+                    android:layout_width="100dp"
+                    android:background="@color/transparent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="输入号牌号码"
+                    android:maxLength="5"
+                    android:singleLine="true" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_toLeftOf="@+id/et_hphm_report"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_fzjg_report"
+                        android:layout_width="40.0dip"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="湘"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="10.0dip"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_hpzl_report"
+                        android:layout_width="40.0dip"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="A"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="10.0dip"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/more" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="违法行为" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_wfxw_report"
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_toLeftOf="@+id/imageView4"
+                    android:gravity="center|right"
+                    android:text="故意遮挡机动车号牌"
+                    android:textColor="@color/black_light"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="违法时间" />
+
+                <TextView
+                    android:id="@+id/tv_time_report"
+                    style="@style/relate_text_right"
+                    android:layout_width="wrap_content"
+                    android:gravity="center|left"
+                    android:text="2016-11-02 11:28:53" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout
+                style="@style/relate_common_item"
+                android:layout_height="80.0dip">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="10.0dip"
+                    android:text="违法地点" />
+
+                <ImageView
+                    android:id="@+id/iv_local_report"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginRight="15.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:background="@color/transparent"
+                    android:paddingLeft="5.0dip"
+                    android:paddingRight="5.0dip"
+                    android:src="@drawable/law_dw"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:id="@+id/et_place_report"
+                    android:layout_width="180.0dip"
+                    android:layout_height="80.0dip"
+                    android:layout_marginRight="5.0dip"
+                    android:layout_toLeftOf="@+id/iv_local_report"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:hint="请输入违法地点"
+                    android:maxLength="120"
+                    android:padding="5.0dip"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    android:id="@+id/textView7"
+                    style="@style/relate_item_text"
+                    android:text="行驶方向" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_xsfx_report"
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_toLeftOf="@id/imageView2"
+                    android:gravity="center|right"
+                    android:text="东到南"
+                    android:textColor="@color/black_light"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    android:id="@+id/textView5"
+                    style="@style/relate_item_text"
+                    android:text="车辆类型" />
+
+                <ImageView
+                    android:id="@id/imageView"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_cllx_report"
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_toLeftOf="@id/imageView"
+                    android:gravity="center|right"
+                    android:text="小型汽车"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="@color/black_light"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="车身颜色" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_csys_report"
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_toLeftOf="@+id/imageView3"
+                    android:gravity="center|right"
+                    android:text="白色"
+                    android:textColor="@color/black_light"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout
+                style="@style/relate_common_item"
+                android:layout_height="80dp">
+
+                <EditText
+                    android:id="@+id/et_bcsm_report"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:hint="请输入补充说明"
+                    android:maxLength="500"
+                    android:paddingLeft="20.0dip"
+                    android:paddingRight="20.0dip"
+                    android:paddingTop="5.0dip"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout
+                style="@style/relate_common_item"
+                android:layout_height="30.0dip">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="照片拍摄" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="100.0dip"
+                android:background="@color/back_gray"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/img_1_report"
+                        android:layout_width="fill_parent"
+                        android:layout_height="145.0dip"
+                        android:layout_margin="3.0dip"
+                        android:background="@drawable/photo_bg" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/img_2_report"
+                        android:layout_width="fill_parent"
+                        android:layout_height="145.0dip"
+                        android:layout_margin="3.0dip"
+                        android:background="@drawable/photo_bg" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10.0dip"
+                    android:layout_weight="1.0"
+                    android:background="@color/white">
+
+                    <ImageView
+                        android:id="@+id/img_3_report"
+                        android:layout_width="fill_parent"
+                        android:layout_height="145.0dip"
+                        android:layout_margin="3.0dip"
+                        android:background="@drawable/photo_bg" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="举报人姓名" />
+
+                <EditText
+                    android:id="@+id/et_name_report"
+                    android:layout_width="150.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@color/transparent"
+                    android:gravity="end|center"
+                    android:hint="请输入姓名"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="手机号码" />
+
+                <EditText
+                    android:id="@+id/et_phone_report"
+                    android:layout_width="150.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@color/transparent"
+                    android:gravity="end|center"
+                    android:hint="请输入手机号码"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:singleLine="true"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="身份号码" />
+
+                <EditText
+                    android:id="@+id/et_card_report"
+                    android:layout_width="150.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@color/transparent"
+                    android:gravity="end|center"
+                    android:hint="请输入身份号码"
+                    android:inputType="number"
+                    android:maxLength="18"
+                    android:singleLine="true"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <RelativeLayout style="@style/relate_common_item">
+
+                <TextView
+                    style="@style/relate_item_text"
+                    android:text="执勤单位" />
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="10.0dip"
+                    android:layout_height="10.0dip"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:src="@drawable/more" />
+
+                <TextView
+                    android:id="@+id/tv_units_report"
+                    android:layout_width="200.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_toLeftOf="@+id/imageView5"
+                    android:gravity="center|right"
+                    android:text="岳麓大队"
+                    android:textAppearance="?android:textAppearanceLarge"
+                    android:textColor="@color/black_light"
+                    android:textSize="14.0sp" />
+            </RelativeLayout>
+
+            <View style="@style/item_view" />
+
+            <Button
+                android:id="@+id/btn_submit_report"
+                android:layout_width="fill_parent"
+                android:layout_height="40.0dip"
+                android:layout_marginBottom="10.0dip"
+                android:layout_marginLeft="20.0dip"
+                android:layout_marginRight="20.0dip"
+                android:layout_marginTop="10.0dip"
+                android:background="@drawable/bg_business_submit"
+                android:gravity="center"
+                android:text="提  交"
+                android:textColor="@color/white"
+                android:textSize="16.0sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
