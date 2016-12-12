@@ -171,7 +171,7 @@ public class MainActivity extends BaseActivity {
         rlLoginOutNh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserUtils.save(MainActivity.this,new User(0,"","",""));
+                UserUtils.save(MainActivity.this, new User(0, "", "", ""));
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
             }
@@ -193,7 +193,11 @@ public class MainActivity extends BaseActivity {
                                  DataWeather dataWeather = gson.fromJson(s, DataWeather.class);
                                  Log.e("MainActivity", dataWeather.getResult().getData().getDate());
                                  tvWeatherHome.setText(dataWeather.getResult().getData().getRealtime().getWeather().getInfo() + " " + dataWeather.getResult().getData().getRealtime().getWeather().getTemperature() + "℃");//天气和温度
-                                 tvAirHome.setText("空气质量：" + " ");
+
+                                 Log.d("MainActivity", dataWeather.getResult().getData().getDate());
+
+                                 /*tvAirHome.setText("pm2.5：" + dataWeather.getResult().getData().getPm25Data().getPm25().getPm25()+"\n"
+                                         +dataWeather.getResult().getData().getPm25Data().getPm25().getQuality() );//*/
                              }
 
                              @Override
@@ -205,7 +209,7 @@ public class MainActivity extends BaseActivity {
                 );
     }
 
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             // 监控返回键
@@ -227,7 +231,7 @@ public class MainActivity extends BaseActivity {
             return false;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
     public class TimeThread extends Thread {
         @Override

@@ -89,7 +89,7 @@
                 android:id="@+id/tv_air_home"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="空气质量：优"
+                android:text="pm2.5:101\n轻度污染"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:layout_below="@id/tv_weather_home"

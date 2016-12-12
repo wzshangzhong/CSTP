@@ -26,6 +26,7 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
     private ArrayList<CSTPReportList.DataBean> dataBeenList ;
     private LayoutInflater inflater;
     private Context context;
+    private String reportsTime="";
 
     public CSTPReportAdapter(Context context, ArrayList<CSTPReportList.DataBean> dataBeenList) {
         this.dataBeenList = dataBeenList;
@@ -34,14 +35,12 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
 
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_selelt, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
-
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final CSTPReportList.DataBean dataBean = dataBeenList.get(position);
@@ -50,7 +49,13 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
         holder.tvId.setText(String.valueOf(position + 1 + ""));
         holder.tvNumber.setText(wfcp);
         holder.tvWfdate.setText(dataBean.getWFSJ());
-
+        if(reportsTime.equals(dataBeenList.get(position).getWFSJ())){
+            holder.tvReportsTime.setVisibility(View.GONE);
+        }else {
+            reportsTime=dataBeenList.get(position).getWFSJ();
+            holder.tvReportsTime.setVisibility(View.VISIBLE);
+            holder.tvReportsTime.setText(reportsTime);
+        }
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +68,6 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
         });
 
     }
-
-
     @Override
     public int getItemCount() {
         return dataBeenList.size();
@@ -76,6 +79,7 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
         TextView tvId;
         TextView tvNumber;
         TextView tvWfdate;
+        TextView tvReportsTime;
 
         public ViewHolder(View view) {
             super(view);
@@ -83,6 +87,7 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
             tvId = (TextView) view.findViewById(R.id.tv_id);
             tvNumber = (TextView) view.findViewById(R.id.tv_HPHM);
             tvWfdate = (TextView) view.findViewById(R.id.tv_WFSJ);
+            tvReportsTime= (TextView) view.findViewById(R.id.reports_time);
         }
     }
 }

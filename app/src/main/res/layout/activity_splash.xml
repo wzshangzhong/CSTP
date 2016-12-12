@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.android.wen.cstp.activity.SplashActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="长沙交警\n智慧长沙新视角\n（假装有图）"
+        android:text="长沙交警\n智慧城市新视角\n"
         android:textSize="36sp" />
 </RelativeLayout>

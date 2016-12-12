@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -136,6 +137,17 @@ public class ReportActivity extends BaseActivity {
         tvTimeReport.setText(cal);
 
         //设置地点
+        postion();
+
+        // 临时 图片文件
+        file = new File(Environment.getExternalStorageDirectory(), "/CSTP/image.jpg");
+
+        //放数据库的
+       // mDaoGenerator = new DaoGenerator(this);
+    }
+
+    //设置地点
+    private void postion() {
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         mLocationOption.setOnceLocation(true);//设置是否启动单次定位 默认不启动
@@ -165,11 +177,6 @@ public class ReportActivity extends BaseActivity {
         mLocationClient.setLocationListener(mLocationListener);
         mLocationClient.setLocationOption(mLocationOption);
         mLocationClient.startLocation(); //启动定位
-        // 临时 图片文件
-        file = new File(Environment.getExternalStorageDirectory(), "/CSTP/image.jpg");
-
-        //放数据库的
-        //mDaoGenerator = new DaoGenerator(this);
     }
 
     @Override
@@ -244,8 +251,9 @@ public class ReportActivity extends BaseActivity {
                 dateTimePicKDialog.dateTimePicKDialog(tvTimeReport);
                 break;
             case R.id.iv_local_report://定位刷新
-                //不知道能不能成
-                mLocationClient.getLastKnownLocation();
+                etPlaceReport.setText("");
+                mLocationClient.onDestroy();
+                postion();
                 break;
             case R.id.tv_xsfx_report://方向
                 builder = new AlertDialog.Builder(this);
@@ -369,7 +377,7 @@ public class ReportActivity extends BaseActivity {
             return;
         }
 
-       /* CSTPReport report = new CSTPReport(null,"mark", time, place, wfch,
+     /*   CSTPReport report = new CSTPReport(null,"mark", time, place, wfch,
                 qksm, name, idCard, phone, snits, uploadFiles[0], uploadFiles[1], uploadFiles[2]);
         mDaoGenerator.add(report);// 通过 insert 方法向数据库中添加数据，因为设置了 id 为主键，所以这里 id 填 null
         List<CSTPReport> reportList=  mDaoGenerator.search();

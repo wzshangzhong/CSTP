@@ -1,10 +1,6 @@
 package com.android.wen.cstp.util;
 
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-
-
 
 /**
  * Created by Administrator on 2016/11/3.
@@ -56,6 +52,6 @@ public class DaoGenerator {
     // 删除所有
     public void deleteAll() {
         mCSTPReportDao.deleteAll();
-    }
+    }*/
 
-*/}
+}

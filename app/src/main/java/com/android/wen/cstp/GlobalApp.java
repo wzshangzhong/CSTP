@@ -17,6 +17,8 @@ import okhttp3.OkHttpClient;
 public class GlobalApp extends Application {
     //http://192.168.1.102/ 本机电脑测试
     public static final String BASE_URL = "http://192.168.1.102:9068/CarInfo/";
+   // public static final String BASE_URL = "http://211.149.209:80/CarInfo/";
+
     //http://192.168.1.102:9068/CarInfo/getCarInfo
     //http://192.168.1.102:9068/CarInfo/
    // public static final String BASE_URL_UP = "http://192.168.1.102:9068/CarInfo/";
@@ -47,8 +49,7 @@ public class GlobalApp extends Application {
 
         OkHttpUtils.init(this);
 
-        //创建表格
-       // new DaoGenerator(this);
+
     }
 
 }

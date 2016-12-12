@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.adapter.CSTPReportAdapter;
@@ -24,10 +23,8 @@ import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.cache.CacheMode;
 import com.lzy.okhttputils.callback.StringCallback;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -50,7 +47,6 @@ public class ReportsActivity extends BaseActivity {
         initView();
         //获取数据库数据
         initDate();
-
     }
 
     private void initView() {
@@ -134,7 +130,6 @@ public class ReportsActivity extends BaseActivity {
                         Gson gson = new Gson();
                         mCSTPReportList = gson.fromJson("{'code':'1','data':" + s + "}", CSTPReportList.class);
 
-
                         //按照时间排序
                         ComparableUtil sort = new ComparableUtil();
                         Collections.sort(mCSTPReportList.getData(), sort);
@@ -203,3 +198,4 @@ public class ReportsActivity extends BaseActivity {
     }
 
 }
+//D:\java\jdk1.8.0_65\bin
