@@ -1,6 +1,5 @@
 package com.android.wen.cstp.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -115,7 +114,7 @@ public class MainActivity extends BaseActivity {
         //设置天气
         tvWeatherHome = (TextView) findViewById(R.id.tv_weather_home);
         tvAirHome = (TextView) findViewById(R.id.tv_air_home);
-        getWeather();
+        //getWeather();
 
         //菜单数据
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_content_home);
@@ -142,7 +141,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("显示文字");
-                builder.setMessage("干嘛点我");
+                builder.setMessage("点击修改");
                 builder.create().show();
             }
         });
@@ -181,7 +180,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void getWeather() {
+    /*public void getWeather() {
         OkHttpUtils.post("http://op.juhe.cn/onebox/weather/query")
                 .params("cityname", "长沙")
                 .params("key", "f269253ceba3112d77bf38afc77edcd5")
@@ -191,13 +190,13 @@ public class MainActivity extends BaseActivity {
                              public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                                  Gson gson = new Gson();
                                  DataWeather dataWeather = gson.fromJson(s, DataWeather.class);
-                                 Log.e("MainActivity", dataWeather.getResult().getData().getDate());
-                                 tvWeatherHome.setText(dataWeather.getResult().getData().getRealtime().getWeather().getInfo() + " " + dataWeather.getResult().getData().getRealtime().getWeather().getTemperature() + "℃");//天气和温度
+//                                 Log.e("MainActivity", dataWeather.getResult().getData().getDate());
+//                                 tvWeatherHome.setText(dataWeather.getResult().getData().getRealtime().getWeather().getInfo() + " " + dataWeather.getResult().getData().getRealtime().getWeather().getTemperature() + "℃");//天气和温度
 
                                  Log.d("MainActivity", dataWeather.getResult().getData().getDate());
 
-                                 /*tvAirHome.setText("pm2.5：" + dataWeather.getResult().getData().getPm25Data().getPm25().getPm25()+"\n"
-                                         +dataWeather.getResult().getData().getPm25Data().getPm25().getQuality() );//*/
+                                 *//*tvAirHome.setText("pm2.5：" + dataWeather.getResult().getData().getPm25Data().getPm25().getPm25()+"\n"
+                                         +dataWeather.getResult().getData().getPm25Data().getPm25().getQuality() );/*//*//*
                              }
 
                              @Override
@@ -207,7 +206,7 @@ public class MainActivity extends BaseActivity {
                              }
                          }
                 );
-    }
+    }*/
 
    /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

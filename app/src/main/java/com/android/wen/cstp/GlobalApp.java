@@ -1,8 +1,11 @@
 package com.android.wen.cstp;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Environment;
+import android.telephony.TelephonyManager;
 
+import com.android.wen.cstp.pojo.AppInfo;
 import com.android.wen.cstp.util.DaoGenerator;
 import com.lzy.okhttputils.OkHttpUtils;
 
@@ -49,7 +52,32 @@ public class GlobalApp extends Application {
 
         OkHttpUtils.init(this);
 
+        android_info();
+    }
+    public void android_info() {
+        AppInfo appInfo = new AppInfo();
+        // appInfo.setPSN("");
 
+        TelephonyManager tm = (TelephonyManager) this
+                .getSystemService(Context.TELEPHONY_SERVICE);//
+        String str = "";
+        str += "DeviceId(IMEI) = " + tm.getDeviceId() + "/n";
+        str += "DeviceSoftwareVersion = " + tm.getDeviceSoftwareVersion()
+                + "/n";
+        str += "Line1Number = " + tm.getLine1Number() + "/n";
+        str += "NetworkCountryIso = " + tm.getNetworkCountryIso() + "/n";
+        str += "NetworkOperator = " + tm.getNetworkOperator() + "/n";
+        str += "NetworkOperatorName = " + tm.getNetworkOperatorName() + "/n";
+        str += "NetworkType = " + tm.getNetworkType() + "/n";
+        str += "honeType = " + tm.getPhoneType() + "/n";
+        str += "SimCountryIso = " + tm.getSimCountryIso() + "/n";
+        str += "SimOperator = " + tm.getSimOperator() + "/n";
+        str += "SimOperatorName = " + tm.getSimOperatorName() + "/n";
+        str += "SimSerialNumber = " + tm.getSimSerialNumber() + "/n";
+        str += "SimState = " + tm.getSimState() + "/n";
+        str += "SubscriberId(IMSI) = " + tm.getSubscriberId() + "/n";
+        str += "VoiceMailNumber = " + tm.getVoiceMailNumber() + "/n";
+        //textView01.setText(str);
     }
 
 }

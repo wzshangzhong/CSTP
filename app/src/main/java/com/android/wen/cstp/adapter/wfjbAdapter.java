@@ -7,28 +7,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.activity.ItemReportActivity;
-import com.android.wen.cstp.pojo.CSTPReportList;
 import com.android.wen.cstp.pojo.CstpWfjb;
 
 import java.util.ArrayList;
 
-
 /**
- * Created by zheng on 2016/8/8.
+ * Created by Administrator on 2016/12/12.
  */
-public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.ViewHolder> {
+public class WfjbAdapter extends RecyclerView.Adapter<WfjbAdapter.ViewHolder> {
 
-    private ArrayList<CSTPReportList.DataBean> dataBeenList ;
+    private ArrayList<CstpWfjb> wfjbDatas ;
     private LayoutInflater inflater;
-    private Context context;
+    private Context mContext;
     private String reportsTime="";
 
-    public CSTPReportAdapter(Context context, ArrayList<CSTPReportList.DataBean> dataBeenList) {
-        this.dataBeenList = dataBeenList;
-        this.context = context;
+    public WfjbAdapter(Context context, ArrayList<CstpWfjb> cstpWfjbs) {
+        this.wfjbDatas = cstpWfjbs;
+        this.mContext = context;
         inflater = LayoutInflater.from(context);
 
     }
@@ -42,52 +41,50 @@ public class CSTPReportAdapter extends RecyclerView.Adapter<CSTPReportAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final CSTPReportList.DataBean dataBean = dataBeenList.get(position);
+        final CstpWfjb wfjbData =wfjbDatas.get(position);
         //违法车牌
-        final String wfcp = dataBean.getFZJGDM() + dataBean.getHPHM().substring(1, dataBean.getHPHM().length());
+        final String wfcp = wfjbData.getWfch();
         holder.tvId.setText(String.valueOf(position + 1 + ""));
         holder.tvNumber.setText(wfcp);
-        holder.tvWfdate.setText(dataBean.getWFSJ());
-        if(reportsTime.equals(dataBeenList.get(position).getWFSJ())){
-            holder.tvReportsTime.setVisibility(View.GONE);
+        holder.tvWfdate.setText(wfjbData.getWfsj());
+        if(reportsTime.equals(wfjbData.getWfsj())){
+            holder.llReportsTime.setVisibility(View.GONE);
         }else {
-            reportsTime=dataBeenList.get(position).getWFSJ();
-            holder.tvReportsTime.setVisibility(View.VISIBLE);
+            reportsTime=wfjbData.getWfsj();
+            holder.llReportsTime.setVisibility(View.VISIBLE);
             holder.tvReportsTime.setText(reportsTime);
         }
-        holder.view.setOnClickListener(new View.OnClickListener() {
+    holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent(context,ItemReportActivity.class);
+                Intent intent =new Intent(mContext,ItemReportActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("dataBean",dataBean);
-
+                bundle.putSerializable("cstpWfjb",wfjbData);
                 intent.putExtras(bundle);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
 
     }
     @Override
     public int getItemCount() {
-        return dataBeenList.size();
+        return wfjbDatas.size();
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         View view;
         TextView tvId;
         TextView tvNumber;
         TextView tvWfdate;
+        LinearLayout llReportsTime;
         TextView tvReportsTime;
-
         public ViewHolder(View view) {
             super(view);
             this.view = view;
             tvId = (TextView) view.findViewById(R.id.tv_id);
             tvNumber = (TextView) view.findViewById(R.id.tv_HPHM);
             tvWfdate = (TextView) view.findViewById(R.id.tv_WFSJ);
-            tvReportsTime= (TextView) view.findViewById(R.id.tv_reports_time);
+            llReportsTime= (LinearLayout) view.findViewById(R.id.ll_reports_time);
+            tvReportsTime = (TextView) view.findViewById(R.id.tv_reports_time);
         }
     }
 }

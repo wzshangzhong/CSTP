@@ -8,19 +8,21 @@ import android.widget.TextView;
 import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.pojo.CSTPReportList;
+import com.android.wen.cstp.pojo.CstpWfjb;
 import com.bumptech.glide.Glide;
 
-import java.util.List;
 /*举报信息详情页面*/
 public class ItemReportActivity extends AppCompatActivity {
     private CSTPReportList.DataBean dataBean;
-
+    private CstpWfjb cstpWfjb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_report);
         dataBean = (CSTPReportList.DataBean) getIntent()
                 .getSerializableExtra("dataBean");
+        cstpWfjb = (CstpWfjb) getIntent()
+                .getSerializableExtra("cstpWfjb");
         /*"发证机关:" + information.FZJGDM,
                 "号牌号码:" + information.HPHM,
                 "违法时间:" + information.WFSJ,
@@ -35,6 +37,7 @@ public class ItemReportActivity extends AppCompatActivity {
         ImageView imageView1 = (ImageView) findViewById(R.id.image1);
         ImageView imageView2 = (ImageView) findViewById(R.id.image2);
         ImageView imageView3 = (ImageView) findViewById(R.id.image3);
+        if(dataBean!=null&&dataBean.getFZJGDM().length()>0){
         String wfcp = dataBean.getFZJGDM() + dataBean.getHPHM().substring(1, dataBean.getHPHM().length());
         tvWfcp.setText(""+wfcp);
         tvWfdz.setText("违法地址："+dataBean.getWFDDDM());
@@ -50,6 +53,24 @@ public class ItemReportActivity extends AppCompatActivity {
         Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
                 + dataBean.getWFBH() + "&num=3").into(imageView3);
 
+        }else if(cstpWfjb!=null&&cstpWfjb.getWfch().length()>0) {
 
+            tvWfcp.setText(""+cstpWfjb.getWfch());
+            tvWfdz.setText("违法地址："+cstpWfjb.getWfld());
+            tvWfsj.setText("违法时间："+cstpWfjb.getWfsj());
+            tvWfbm.setText("联系电话："+cstpWfjb.getLxdh());
+
+            /*Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+                    + dataBean.getWFBH() + "&num=0").into(imageView0);
+            Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+                    + dataBean.getWFBH() + "&num=1").into(imageView1);
+            Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+                    + dataBean.getWFBH() + "&num=2").into(imageView2);
+            Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+                    + dataBean.getWFBH() + "&num=3").into(imageView3);*/
+            Glide.with(this).load(cstpWfjb.getImage1_path()).into(imageView1);
+            Glide.with(this).load(cstpWfjb.getImage2_path()).into(imageView2);
+            Glide.with(this).load(cstpWfjb.getImage3_path()).into(imageView3);
+        }
     }
 }

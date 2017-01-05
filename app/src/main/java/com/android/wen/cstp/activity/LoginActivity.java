@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.wen.cstp.R;
+import com.android.wen.cstp.base.BaseActivity;
 import com.android.wen.cstp.pojo.User;
 import com.android.wen.cstp.util.UserUtils;
 
@@ -19,7 +20,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     @Bind(R.id.et_user_name)
     EditText etUserName;

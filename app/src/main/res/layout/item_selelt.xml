@@ -4,17 +4,32 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_item"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/reports_time"
+
+    <LinearLayout
+        android:id="@+id/ll_reports_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="8dp"
-        android:text="2016/12/12" />
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            android:id="@+id/tv_reports_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="#ddd"
+            android:text="2016/12/12" />
+    </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.1dp"
         android:background="@android:color/darker_gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"

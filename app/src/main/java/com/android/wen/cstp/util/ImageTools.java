@@ -2,7 +2,10 @@ package com.android.wen.cstp.util;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -85,5 +88,32 @@ public class ImageTools {
                 }
             }
         }
+    }
+    public static Bitmap createWatermark(Bitmap target, String mark) {
+        int w = target.getWidth();
+        int h = target.getHeight();
+
+        Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+
+        Paint p = new Paint();
+
+        // 水印的颜色
+        p.setColor(Color.RED);
+
+        // 水印的字体大小
+        p.setTextSize(15);
+
+        p.setAntiAlias(true);// 去锯齿
+
+        canvas.drawBitmap(target, 0, 0, p);
+
+        // 在左边的中间位置开始添加水印
+        canvas.drawText(mark, 0, h / 2, p);
+
+        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.restore();
+
+        return bmp;
     }
 }

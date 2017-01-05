@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,11 +27,11 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.android.wen.cstp.R;
 import com.android.wen.cstp.base.BaseActivity;
-import com.android.wen.cstp.util.DaoGenerator;
+import com.android.wen.cstp.util.MD5;
 import com.android.wen.cstp.view.DateTimePickDialogUtil;
 import com.android.wen.cstp.GlobalApp;
-import com.android.wen.cstp.R;
 import com.android.wen.cstp.util.ImageTools;
 import com.android.wen.cstp.view.LoadDialog;
 import com.bumptech.glide.Glide;
@@ -38,8 +39,10 @@ import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.model.HttpParams;
 import com.lzy.okhttputils.request.BaseRequest;
-
-
+import com.sivan.greendaopractice.DaoMaster;
+import com.sivan.greendaopractice.DaoSession;
+import com.sivan.greendaopractice.cstp_wfjb;
+import com.sivan.greendaopractice.cstp_wfjbDao;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,7 +51,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -112,9 +114,12 @@ public class ReportActivity extends BaseActivity {
     private static final int SCALE = 2;
 
     //放数据库的
-    private DaoGenerator mDaoGenerator;
-
-
+    private DaoMaster.DevOpenHelper mHelper;
+    private SQLiteDatabase db;
+    private DaoSession mDaoSession;
+    private DaoMaster mDaoMaster;
+    private cstp_wfjbDao mWfjbDao;
+    private Cursor cursor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -143,9 +148,8 @@ public class ReportActivity extends BaseActivity {
         file = new File(Environment.getExternalStorageDirectory(), "/CSTP/image.jpg");
 
         //放数据库的
-       // mDaoGenerator = new DaoGenerator(this);
+        // mDaoGenerator = new DaoGenerator(this);
     }
-
     //设置地点
     private void postion() {
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
@@ -277,7 +281,6 @@ public class ReportActivity extends BaseActivity {
                         "小型汽车", "大型汽车", "普通摩托车",
                         "挂车", "低速车", "轻便摩托车",
                         "教练汽车", "教练摩托车"};
-
                 builder.setItems(cllxs, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -376,13 +379,11 @@ public class ReportActivity extends BaseActivity {
             Toast.makeText(this, "请选择两张照片!", Toast.LENGTH_SHORT).show();
             return;
         }
-
-     /*   CSTPReport report = new CSTPReport(null,"mark", time, place, wfch,
-                qksm, name, idCard, phone, snits, uploadFiles[0], uploadFiles[1], uploadFiles[2]);
-        mDaoGenerator.add(report);// 通过 insert 方法向数据库中添加数据，因为设置了 id 为主键，所以这里 id 填 null
-        List<CSTPReport> reportList=  mDaoGenerator.search();
-
-        Log.v("ReportActivity",reportList.get(0).getWfsj());*/
+        //Person person = new Person(null, name, sex);
+        cstp_wfjb wfjbData = new cstp_wfjb(null,"mark",time,place,wfch,qksm,name,
+                idCard,phone,snits,uploadFiles[0],uploadFiles[1],uploadFiles[2]);
+        //数据库操作
+        initSQLite(wfjbData);
 
         HttpParams params = new HttpParams();
         params.put("wfsj", time);//违法时间
@@ -410,24 +411,39 @@ public class ReportActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
-                        Log.v("ReportActivity ", "onResponse:"+s );
-                      // super.onResponse(isFromCache,s,request,response);
+                        Log.v("ReportActivity ", "onResponse:" + s);
+                        // super.onResponse(isFromCache,s,request,response);
                     }
 
 
                     @Override
                     public void onAfter(boolean isFromCache, @Nullable String s, Call call, @Nullable Response response, @Nullable Exception e) {
                         dialog.dismiss();
-                        Log.v("ReportActivity", "onAfter:"+s);
+                        Log.v("ReportActivity", "onAfter:" + s);
                     }
 
                     @Override
                     public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
-                        Log.v("ReportActivity", "onError:"+e.toString());
+                        Log.v("ReportActivity", "onError:" + e.toString());
                         super.onError(isFromCache, call, response, e);
                     }
                 });
 
+    }
+
+    private void initSQLite(cstp_wfjb wfjbData) {
+        mHelper = new DaoMaster.DevOpenHelper(this, "test-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+        // 得到 Dao 对象，数据库的 CRUD 操作都是通过此对象来进行
+        mWfjbDao = mDaoSession.getCstp_wfjbDao();
+
+        //添加数据
+
+        // 通过 insert 方法向数据库中添加数据，因为设置了 id 为主键，所以这里 id 填 null
+      long l=  mWfjbDao.insert(wfjbData);
+        Log.v("ReportActivity","SQLite添加成功"+l+"");
     }
 
     private void startImage(int i) {
@@ -471,6 +487,8 @@ public class ReportActivity extends BaseActivity {
                                 Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                 Uri imageUri = Uri.fromFile(file);
                                 // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
+
+                               // Glide.
                                 openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                                 startActivityForResult(openCameraIntent, TAKE_PHOTO);
                                 break;
@@ -483,36 +501,35 @@ public class ReportActivity extends BaseActivity {
                         }
                     }
                 });
-
         builder.create().show();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case TAKE_PHOTO:
-
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                    handleImage(bitmap);//显示并保存图片
+                    //水印
+                    Bitmap bmp =ImageTools.zoomBitmap(bitmap,320,480);
+                    bitmap.recycle();
+                    bitmap = ImageTools.createWatermark(bmp, MD5.md5(tvTimeReport.getText().toString()));
 
+                    handleImage(bitmap);//显示并保存图片
                     break;
                 case CHOOSE_PHONE:
 
                     ContentResolver resolver = this.getContentResolver();
                     Uri originalUri = data.getData();// 照片的原始资源地址
-
                     try {
                         // 通过内容访问者和图片url获得bitmap的图片(相册中的原图)
                         Bitmap photo = MediaStore.Images.Media.getBitmap(resolver, originalUri);
                         if (photo != null) {
                             // 为防止原始图片过大导致内存溢出，这里先缩小原图显示，然后释放原始Bitmap占用的内存
-                            Bitmap smallBitmap = ImageTools.zoomBitmap(
-                                    photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);
-
-                            handleImage(smallBitmap);//显示并保存图片
+                           /* Bitmap smallBitmap = ImageTools.zoomBitmap(
+                                    photo, photo.getWidth() / SCALE, photo.getHeight() / SCALE);*/
+                            handleImage(photo);//显示并保存图片
                         }
                     } catch (FileNotFoundException e) {
                         Toast.makeText(this, "文件不存在", Toast.LENGTH_SHORT).show();
@@ -535,7 +552,7 @@ public class ReportActivity extends BaseActivity {
         Glide.with(this)
                 .load(new File(uploadFiles[position]))
                 .into(showImage());
-        //判断图片大小
+       /* //判断图片大小
         if (bitmap.getByteCount() > 2 * 1024 * 1024) {
             bitmap = ImageTools.zoomBitmap(
                     bitmap, bitmap.getWidth() / SCALE, bitmap.getHeight() / SCALE);
@@ -548,7 +565,7 @@ public class ReportActivity extends BaseActivity {
                 break;
             }
 
-        }
+        }*/
         Log.v("ReportActivity", bitmap.getByteCount() + "");//63700992 6.15M
         //清除图片
         file.delete();

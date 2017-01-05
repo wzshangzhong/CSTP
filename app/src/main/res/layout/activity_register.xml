@@ -87,6 +87,55 @@
                         android:hint="请输入手机号码"
                         android:singleLine="true" />
                 </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="所在单位" />
+
+                    <TextView
+                        android:id="@+id/tv_mobile_unit"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请选择所在单位"
+                        android:singleLine="true" />
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:padding="16dp"
+                    android:text="设置密码"
+                    android:background="#dddd"
+                    android:textColor="#ffff7f00"
+                    android:textSize="12sp" />
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="设置密码" />
+
+                    <EditText
+                        android:id="@+id/et_mobile_password"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="确认密码" />
+
+                    <EditText
+                        android:id="@+id/et_mobile_passwords"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请确认密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+                </RelativeLayout>
             </LinearLayout>
 
             <Button
