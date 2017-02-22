@@ -3,7 +3,7 @@ package com.android.wen.cstp.activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
+
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity {
         rlLoginOutNh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserUtils.save(MainActivity.this, new User(0, "", "", ""));
+                UserUtils.save(MainActivity.this, new User());
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
             }

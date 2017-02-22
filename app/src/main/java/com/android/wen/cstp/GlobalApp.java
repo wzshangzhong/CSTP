@@ -4,11 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
 import android.telephony.TelephonyManager;
-
 import com.android.wen.cstp.pojo.AppInfo;
-import com.android.wen.cstp.util.DaoGenerator;
 import com.lzy.okhttputils.OkHttpUtils;
-
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 

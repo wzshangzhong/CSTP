@@ -65,7 +65,7 @@
                         android:text="身份证号码" />
 
                     <EditText
-                        android:id="@+id/edt_id_card_no"
+                        android:id="@+id/edt_id_card"
                         style="@style/relate_text_right"
                         android:background="@color/transparent"
                         android:hint="请输入身份证号码"
@@ -90,14 +90,161 @@
                 <RelativeLayout style="@style/relate_common_item">
 
                     <TextView
+                        android:id="@id/textView2"
+                        style="@style/relate_item_text"
+                        android:text="车牌号码"
+                        />
+
+                    <EditText
+                        android:id="@+id/et_hphm_reg"
+                        style="@style/relate_text_right"
+                        android:layout_width="100dp"
+                        android:background="@color/transparent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="请输入您的牌号"
+                        android:maxLength="5"
+                        android:singleLine="true" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_toLeftOf="@+id/et_hphm_report"
+                        android:orientation="horizontal"
+                        android:id="@+id/linearLayout">
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="10.0dip"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/more"
+
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/textView2"
+                        android:layout_toEndOf="@id/textView2"
+                        android:id="@+id/imageView7" />
+                    <TextView
+                        android:id="@+id/tv_fzjg_reg"
+                        android:layout_width="40.0dip"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="湘"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp"
+
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/imageView7"
+                        android:layout_toEndOf="@+id/imageView7" />
+
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="10.0dip"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/more"
+                        android:id="@+id/imageView8"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_fzjg_reg"
+                        android:layout_toEndOf="@+id/tv_fzjg_reg" />
+
+                    <TextView
+                        android:id="@+id/tv_hpzl_reg"
+                        android:layout_width="40.0dip"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="A"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/imageView8"
+                        android:layout_toEndOf="@+id/imageView8" />
+
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
                         style="@style/relate_item_text"
                         android:text="所在单位" />
 
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
+
                     <TextView
-                        android:id="@+id/tv_mobile_unit"
+                        android:id="@+id/tv_unit_reg"
+                        android:layout_width="200.0dip"
+                        android:layout_height="fill_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="8.0dip"
+                        android:layout_toLeftOf="@+id/imageView5"
+                        android:gravity="center|right"
+                        android:text="岳麓大队"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp" />
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="银行卡号" />
+                    <EditText
+                        android:id="@+id/tv_bank_car"
                         style="@style/relate_text_right"
                         android:background="@color/transparent"
-                        android:hint="请选择所在单位"
+                        android:hint="请填写银行卡号"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLength="19"
+                        android:minLines="19"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="性别" />
+
+                    <TextView
+                        android:id="@+id/tv_sex"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="选择性别"
+                        android:singleLine="true" />
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="出生日期" />
+
+                    <TextView
+                        android:id="@+id/tv_birthday"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请选择出生日期"
+                        android:singleLine="true" />
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="现住址" />
+
+                    <TextView
+                        android:id="@+id/tv_location_now"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请填写住址"
                         android:singleLine="true" />
                 </RelativeLayout>
                 <TextView

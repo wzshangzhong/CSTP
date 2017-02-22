@@ -21,7 +21,6 @@ public class UserUtils {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("id", 1);
         editor.putString("username", user.getUsername());
-        editor.putString("imgUser", user.getImgUserPath());
         editor.commit();
     }
 
@@ -30,8 +29,10 @@ public class UserUtils {
                 context.getSharedPreferences(PREFS_NAME, PREFS_MODE);
         Integer id = preferences.getInt("id", 0);
         String username = preferences.getString("username", "");
-        String imgUserString = preferences.getString("imgUser", "");
-        User user = new User(id, username, "", imgUserString);
+       // String imgUserString = preferences.getString("imgUser", "");
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
         return user;
     }
 
