@@ -1,4 +1,4 @@
-package com.wenz.shopping;
+package com.wenz.shopping.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
@@ -6,6 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.wenz.shopping.R;
+import com.wenz.shopping.activity.ShoppingCartActivity;
+import com.wenz.shopping.pojo.GoodsItem;
+
 import java.text.NumberFormat;
 
 

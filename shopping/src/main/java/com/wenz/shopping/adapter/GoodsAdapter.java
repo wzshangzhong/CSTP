@@ -1,4 +1,4 @@
-package com.wenz.shopping;
+package com.wenz.shopping.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,11 @@ import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.wenz.shopping.R;
+import com.wenz.shopping.activity.ShoppingCartActivity;
+import com.wenz.shopping.pojo.GoodsItem;
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;

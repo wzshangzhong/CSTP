@@ -1,4 +1,4 @@
-package com.wenz.shopping;
+package com.wenz.shopping.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;

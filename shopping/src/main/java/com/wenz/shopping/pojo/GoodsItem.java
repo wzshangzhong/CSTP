@@ -1,16 +1,16 @@
-package com.wenz.shopping;
+package com.wenz.shopping.pojo;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class GoodsItem{
-    public int id;
-    public int typeId;
-    public int rating;
-    public String name;
-    public String typeName;
-    public double price;
-    public int count;
+    public int id;//id
+    public int typeId;//商品种类id
+    public int rating;//评分
+    public String name;//商品名字
+    public String typeName;//种类名字
+    public double price;//商品价格
+    public int count;//总数
 
     public GoodsItem(int id, double price, String name, int typeId, String typeName) {
         this.id = id;

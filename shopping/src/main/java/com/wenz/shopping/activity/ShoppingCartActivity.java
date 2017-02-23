@@ -1,4 +1,4 @@
-package com.wenz.shopping;
+package com.wenz.shopping.activity;
 
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -23,10 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.wenz.shopping.view.DividerDecoration;
+import com.wenz.shopping.R;
+import com.wenz.shopping.adapter.GoodsAdapter;
+import com.wenz.shopping.adapter.SelectAdapter;
+import com.wenz.shopping.adapter.TypeAdapter;
+import com.wenz.shopping.pojo.GoodsItem;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener {
@@ -79,7 +84,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         listView = (StickyListHeadersListView) findViewById(R.id.itemListView);//右边食品表
 
         rvType.setLayoutManager(new LinearLayoutManager(this));//设置左边目录为线性布局
-        typeAdapter = new TypeAdapter(this, typeList);
+        typeAdapter = new TypeAdapter(this, typeList);//设置左边种类数据
         rvType.setAdapter(typeAdapter);
         rvType.addItemDecoration(new DividerDecoration(this));//添加分割线装饰？先注释掉
 
@@ -89,7 +94,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+            //listView滑动状态改变时
             }
 
             @Override
