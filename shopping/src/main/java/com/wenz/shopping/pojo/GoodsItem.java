@@ -1,5 +1,7 @@
 package com.wenz.shopping.pojo;
 
+import android.media.Image;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,6 +13,7 @@ public class GoodsItem{
     public String typeName;//种类名字
     public double price;//商品价格
     public int count;//总数
+    public Image pic;//图片
 
     public GoodsItem(int id, double price, String name, int typeId, String typeName) {
         this.id = id;

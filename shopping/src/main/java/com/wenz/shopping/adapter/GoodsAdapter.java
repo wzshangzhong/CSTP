@@ -20,7 +20,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-
+//设置右边详情列表
 public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 
     private ArrayList<GoodsItem> dataList;

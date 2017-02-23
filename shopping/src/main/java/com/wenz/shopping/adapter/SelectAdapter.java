@@ -13,7 +13,7 @@ import com.wenz.shopping.pojo.GoodsItem;
 
 import java.text.NumberFormat;
 
-
+//底部购物车适配器
 public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder>{
     private ShoppingCartActivity activity;
     private SparseArray<GoodsItem> dataList;

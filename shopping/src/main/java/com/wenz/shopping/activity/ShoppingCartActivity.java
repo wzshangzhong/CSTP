@@ -86,7 +86,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         rvType.setLayoutManager(new LinearLayoutManager(this));//设置左边目录为线性布局
         typeAdapter = new TypeAdapter(this, typeList);//设置左边种类数据
         rvType.setAdapter(typeAdapter);
-        rvType.addItemDecoration(new DividerDecoration(this));//添加分割线装饰？先注释掉
+        rvType.addItemDecoration(new DividerDecoration(this));//动画
 
         myAdapter = new GoodsAdapter(dataList, this);//右边数据
         listView.setAdapter(myAdapter);
@@ -180,12 +180,13 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bottom:
+                //点击购物车的时候显示？
                 showBottomSheet();
                 break;
-            case R.id.clear:
+            case R.id.clear://清空
                 clearCart();
                 break;
-            case R.id.tvSubmit:
+            case R.id.tvSubmit://结算
                 Toast.makeText(ShoppingCartActivity.this, "结算", Toast.LENGTH_SHORT).show();
                 break;
             default:

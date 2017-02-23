@@ -13,7 +13,7 @@ import com.wenz.shopping.pojo.GoodsItem;
 
 import java.util.ArrayList;
 
-
+//设置左边目录列表
 public class TypeAdapter extends RecyclerView.Adapter<TypeAdapter.ViewHolder> {
     public int selectTypeId;
     public ShoppingCartActivity activity;
