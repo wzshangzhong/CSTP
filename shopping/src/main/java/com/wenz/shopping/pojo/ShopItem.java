@@ -1,6 +1,7 @@
 package com.wenz.shopping.pojo;
 
 
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 
 import com.wenz.shopping.R;
@@ -16,23 +17,21 @@ public class ShopItem {
     public int rating;//评分
     public String name;//店名
     public String typeName;//商品标签
-    public double price;//人均消费价格
     public int count;//人气
-    public int shopAv;
+    public int priAv;//人均消费价格
     public String phone;//电话
     public String location;//位置标签
     public double longitude;//经度
     public double latitude;//纬度
-    public Image pic;//图片
+    public Drawable pic;//图片
 
-    public ShopItem(int id, int rating, String name, String typeName, double price, int count, int shopAv, String phone, String location, double longitude, double latitude, Image pic) {
+    public ShopItem(int id, int rating, String name, String typeName, int count, int priAv, String phone, String location, double longitude, double latitude, Drawable pic) {
         this.id = id;
         this.rating = rating;
         this.name = name;
         this.typeName = typeName;
-        this.price = price;
         this.count = count;
-        this.shopAv = shopAv;
+        this.priAv = priAv;
         this.phone = phone;
         this.location = location;
         this.longitude = longitude;
@@ -45,14 +44,6 @@ public class ShopItem {
 
     public int getId() {
         return id;
-    }
-
-    public void setShopAv(int shopAv) {
-        this.shopAv = shopAv;
-    }
-
-    public int getShopAv() {
-        return rating;
     }
 
     public void setId(int id) {
@@ -83,20 +74,20 @@ public class ShopItem {
         this.typeName = typeName;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getCount() {
         return count;
     }
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getPriAv() {
+        return priAv;
+    }
+
+    public void setPriAv(int priAv) {
+        this.priAv = priAv;
     }
 
     public String getPhone() {
@@ -131,11 +122,11 @@ public class ShopItem {
         this.latitude = latitude;
     }
 
-    public Image getPic() {
+    public Drawable getPic() {
         return pic;
     }
 
-    public void setPic(Image pic) {
+    public void setPic(Drawable pic) {
         this.pic = pic;
     }
 }

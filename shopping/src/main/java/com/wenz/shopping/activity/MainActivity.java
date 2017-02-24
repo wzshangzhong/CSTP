@@ -1,24 +1,19 @@
 package com.wenz.shopping.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Toast;
 
 import com.wenz.shopping.R;
 import com.wenz.shopping.adapter.ShopAdapter;
 import com.wenz.shopping.pojo.ShopItem;
-
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
@@ -29,11 +24,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("餐馆");
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         shopItemList = new ArrayList<>();
-        for (int i=0; i > 10; i++) {
-            int in = (int) (Math.random()*i*10);
-            //shopItemList.add(new ShopItem(i,(int) (Math.random()*i*10),String.format(""));
+        for (int i=0; i < 10; i++) {
+
+            shopItemList.add(new ShopItem(i,(int) (Math.random()*i),
+                    String.format("%d号店",i+1),"小炒肉，香干回锅肉...",
+                    (int)(Math.random()*i*100),(int)(Math.random()*i*100),
+                    "0731-73990928","平川路",113d,29d,
+                    ContextCompat.getDrawable(this,R.mipmap.ic_launcher)));
         }
         // 设置ItemAnimator
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ShopAdapter(this, shopItemList);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
-
 
     }
 }

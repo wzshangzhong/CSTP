@@ -1,5 +1,6 @@
 package com.wenz.shopping.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import com.wenz.shopping.pojo.GoodsItem;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,17 +59,41 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        setTitle("商品详情");
+
+        initData();
+        initView();
+    }
+
+    private void initData() {
+
+        Bundle bundle =getIntent().getExtras();
+        int shopId = bundle.getInt("ShopId");
+        String name = bundle.getString("name");
+        NetData(shopId);
+
+        setTitle(name);
         nf = NumberFormat.getCurrencyInstance();//输出货币类型的值
         nf.setMaximumFractionDigits(2); //设置最大分数位为2
         mHanlder = new Handler(getMainLooper()); //getMainLooper()返回应用主线程中的 Looper
-        dataList = GoodsItem.getGoodsList();//设置具体商品数据
-        typeList = GoodsItem.getTypeList();//设置种类1种类2的--左边目录
+       /* dataList = GoodsItem.getGoodsList();//设置具体商品数据
+        typeList = GoodsItem.getTypeList();//设置种类1种类2的--左边目录*/
         selectedList = new SparseArray<>();//SparseArray：更高效的数据集合来替代HashMap在android中的使用
         groupSelect = new SparseIntArray();
         //SparseArra和SparseIntArray解释
         // http://www.voidcn.com/blog/stzy00/article/p-65828.html
-        initView();
+    }
+
+    private void NetData(int shopId) {
+        dataList = new ArrayList<>();
+        typeList = new ArrayList<>();
+        GoodsItem item = null;
+        for (int i = 1; i < 15; i++) {
+            for (int j = 1; j < 10; j++) {
+                item = new GoodsItem(100 * i + j, Math.random() * 100, "商品" + (100 * i + j), i, "种类" + i);
+                dataList.add(item);
+            }
+            typeList.add(item);
+        }
     }
 
     private void initView() {
@@ -94,7 +120,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-            //listView滑动状态改变时
+                //listView滑动状态改变时
             }
 
             @Override

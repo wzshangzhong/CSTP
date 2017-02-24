@@ -2,6 +2,7 @@ package com.wenz.shopping.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,10 +43,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ShopItem shopItem = shopItems.get(position);
+        final ShopItem shopItem = shopItems.get(position);
         holder.tvName.setText(shopItem.getName());
-        holder.tvShopAv.setText(shopItem.getShopAv());
-        holder.ratingBar.setRating(Float.intBitsToFloat(shopItem.getRating()));
+        holder.tvShopAv.setText(String.format("￥%S/人", shopItem.getPriAv()));
+        holder.ratingBar.setRating((float) shopItem.getRating());
         holder.tvLocation.setText(shopItem.getLocation());
         holder.tvLabShop.setText(shopItem.getTypeName());
 
@@ -53,10 +54,16 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(activity, ShoppingCartActivity.class));
+                Intent intent = new Intent(activity, ShoppingCartActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("ShopId", shopItem.getId());
+                bundle.putString("name",shopItem.getName());
+                intent.putExtras(bundle);
+                activity.startActivity(intent);
+
+
             }
         });
-
 
     }
 
@@ -72,7 +79,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder> {
         public RatingBar ratingBar;
         private TextView tvLabShop;
         private TextView tvLocation;
-
         private TextView tvShopAv;
 
         public ViewHolder(View view) {
