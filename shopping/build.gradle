@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.0.1'
 
     compile 'com.lzy.net:okhttputils:1.7.2'
+    compile 'com.google.code.gson:gson:2.7'
 }
