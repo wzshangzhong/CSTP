@@ -1,6 +1,6 @@
 package com.wenz.shopping.activity;
 
-import android.content.Intent;
+
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,6 +33,7 @@ import com.wenz.shopping.pojo.GoodsItem;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
@@ -45,7 +46,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private BottomSheetLayout bottomSheetLayout;
     private View bottomSheet;
     private StickyListHeadersListView listView;
-    private ArrayList<GoodsItem> dataList, typeList;
+    private ArrayList<GoodsItem> goodsItems, dataList, typeList;
     private SparseArray<GoodsItem> selectedList;
     private SparseIntArray groupSelect;
     private GoodsAdapter myAdapter;
@@ -66,9 +67,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private void initData() {
 
-        Bundle bundle =getIntent().getExtras();
+        Bundle bundle = getIntent().getExtras();
         int shopId = bundle.getInt("ShopId");
         String name = bundle.getString("name");
+        goodsItems = (ArrayList<GoodsItem>) bundle.getSerializable("goodsItems");
         NetData(shopId);
 
         setTitle(name);
@@ -86,14 +88,24 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private void NetData(int shopId) {
         dataList = new ArrayList<>();
         typeList = new ArrayList<>();
-        GoodsItem item = null;
-        for (int i = 1; i < 15; i++) {
+        //所有数据添加至dataList 不同类型数据添加至typeList
+        int count = goodsItems.size();
+        for (int i = 0; i < count; i++) {
+            dataList.add(goodsItems.get(i));
+
+            if (i != 0 && goodsItems.get(i).typeId != goodsItems.get(i - 1).typeId) {
+                typeList.add(goodsItems.get(i));
+            } else if(i==0) {
+                typeList.add(goodsItems.get(0));
+            }
+        }
+       /* for (int i = 1; i < 15; i++) {
             for (int j = 1; j < 10; j++) {
                 item = new GoodsItem(100 * i + j, Math.random() * 100, "商品" + (100 * i + j), i, "种类" + i);
                 dataList.add(item);
             }
             typeList.add(item);
-        }
+        }*/
     }
 
     private void initView() {

@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,19 +30,17 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ListView mListView;
+    private ShopAdapter mAdapter;
     private ArrayList<ShopItem> shopItemList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.v("MainActivity is :", "initData()");
         initData();
-        Log.v("MainActivity is :", "initView");
         initView();
-        Log.v("MainActivity is :", "initView end");
 
 
       /*  for (int i = 0; i < 10; i++) {
@@ -57,31 +57,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         setTitle("餐馆");
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mListView = (ListView) findViewById(R.id.list_view);
         shopItemList = new ArrayList<>();
-        // 设置ItemAnimator
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        // 设置固定大小
-        mRecyclerView.setHasFixedSize(true);
-        //mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));//这里用线性宫格显示 类似于gridview
-        //mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL));//这里用线性宫格显示 类似于瀑布流
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ShopAdapter(this, shopItemList);
-        mRecyclerView.setAdapter(mAdapter);
 
     }
 
     private void initData() {
-        Log.v("MainActivity is :", "NetData()");
         NetData();
-        Log.v("MainActivity is :", "NetData end");
-
-
     }
 
     private void NetData() {
+
         OkHttpUtils
-                .post("http://192.168.0.113:8082/api/shop/post")
+                .post(App.BASE_URL+"/api/shop/post")
                 .postJson("{'code':'1'}")
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .execute(new StringCallback() {
@@ -89,19 +77,23 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(boolean isFromCache,
                                            String s, Request request,
                                            @Nullable Response response) {
+
+
                         Log.v("MainActivity is json:", s);
                         Log.v("MainActivity request:", request.toString());
                         Log.v("MainActivity response:", response.toString());
-                        Log.v("MainActivity isFromCache:", isFromCache+"");
+                        Log.v("MainActivity isFromCache:", isFromCache + "");
 
 
                         Gson gson = new Gson();
                         shopItemList = gson.fromJson(s,
                                 new TypeToken<ArrayList<ShopItem>>() {
                                 }.getType());
+
                         Log.v("MainActivity is json:", s);
-                        Log.v("Main shopItem:", shopItemList.get(0).getName());
-                        mAdapter.notifyDataSetChanged();
+                        Log.v("MainActivity shopItem:", shopItemList.get(0).getName());
+                        mAdapter = new ShopAdapter(MainActivity.this, shopItemList);
+                        mListView.setAdapter(mAdapter);
                     }
 
                     @Override
@@ -109,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
                                         Call call, @Nullable Response response,
                                         @Nullable Exception e) {
                         super.onError(isFromCache, call, response, e);
-                        Log.v("MainActivity is Error",e.toString());
-                        // Log.v("MainActivity is Error",response.toString());
+                        Log.v("MainActivity is Error", e.toString());
+                        Log.v("MainActivity is Error", response.toString());
                     }
                 });
     }

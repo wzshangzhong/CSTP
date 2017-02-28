@@ -23,9 +23,29 @@ public class ShopItem {
     public String location;//位置标签
     public double longitude;//经度
     public double latitude;//纬度
-    public Drawable pic;//图片
+    public String pic;//图片
 
-    public ShopItem(int id, int rating, String name, String typeName, int count, int priAv, String phone, String location, double longitude, double latitude, Drawable pic) {
+    public ShopItem() {
+    }
+
+    @Override
+    public String toString() {
+        return "ShopItem{" +
+                "id=" + id +
+                ", rating=" + rating +
+                ", name='" + name + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", count=" + count +
+                ", priAv=" + priAv +
+                ", phone='" + phone + '\'' +
+                ", location='" + location + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", pic='" + pic + '\'' +
+                '}';
+    }
+
+    public ShopItem(int id, int rating, String name, String typeName, int count, int priAv, String phone, String location, double longitude, double latitude, String pic) {
         this.id = id;
         this.rating = rating;
         this.name = name;
@@ -37,9 +57,6 @@ public class ShopItem {
         this.longitude = longitude;
         this.latitude = latitude;
         this.pic = pic;
-    }
-
-    public ShopItem() {
     }
 
     public int getId() {
@@ -122,11 +139,11 @@ public class ShopItem {
         this.latitude = latitude;
     }
 
-    public Drawable getPic() {
+    public String getPic() {
         return pic;
     }
 
-    public void setPic(Drawable pic) {
+    public void setPic(String pic) {
         this.pic = pic;
     }
 }
