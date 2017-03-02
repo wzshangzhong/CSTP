@@ -1,15 +1,12 @@
 package com.wenz.shopping.activity;
 
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -78,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                                            String s, Request request,
                                            @Nullable Response response) {
 
-
                         Log.v("MainActivity is json:", s);
                         Log.v("MainActivity request:", request.toString());
                         Log.v("MainActivity response:", response.toString());
@@ -91,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                 }.getType());
 
                         Log.v("MainActivity is json:", s);
-                        Log.v("MainActivity shopItem:", shopItemList.get(0).getName());
+
                         mAdapter = new ShopAdapter(MainActivity.this, shopItemList);
                         mListView.setAdapter(mAdapter);
                     }
@@ -100,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onError(boolean isFromCache,
                                         Call call, @Nullable Response response,
                                         @Nullable Exception e) {
-                        super.onError(isFromCache, call, response, e);
+                        Toast.makeText(MainActivity.this,"网络异常",Toast.LENGTH_LONG).show();
                         Log.v("MainActivity is Error", e.toString());
-                        Log.v("MainActivity is Error", response.toString());
+                        //Log.v("MainActivity is Error", response.toString());
                     }
                 });
     }

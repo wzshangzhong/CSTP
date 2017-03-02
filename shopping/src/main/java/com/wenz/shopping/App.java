@@ -16,6 +16,9 @@ import okhttp3.OkHttpClient;
 public class App extends Application {
     //内网服务器测试
     public static final String BASE_URL = "http://192.168.0.113:8082/";
+    public static final String SHOP_URL = "http://192.168.0.113:8082/APP_SHOP/";
+    public static final String GOODS_URL = "http://192.168.0.113:8082/APP_GOODS/";
+
    // public static  String json = "[{'id':2,'rating':3,'name':'商品1','typeName':'种类1','count':10,'priAv':20,'phone':'0731-83990928','location':'文轩路','longitude':113,'latitude':29,'pic':'APP_SHOP/02_24.png'},{'id':3,'rating':3,'name':'商品1','typeName':'种类1','count':10,'priAv':20,'phone':'0731-83990928','location':'文轩路','longitude':113,'latitude':29,'pic':'APP_SHOP/02_24.png'},{'id':4,'rating':3,'name':'商品1','typeName':'种类1','count':10,'priAv':20,'phone':'0731-83990928','location':'文轩路','longitude':113,'latitude':29,'pic':'02_24.png'}]";
 
 

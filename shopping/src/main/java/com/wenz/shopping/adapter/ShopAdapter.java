@@ -1,13 +1,12 @@
 package com.wenz.shopping.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ActivityChooserView;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,10 +26,9 @@ import com.wenz.shopping.R;
 import com.wenz.shopping.activity.ShoppingCartActivity;
 import com.wenz.shopping.pojo.GoodsItem;
 import com.wenz.shopping.pojo.ShopItem;
-
 import java.util.ArrayList;
-import java.util.List;
 
+import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -44,6 +42,7 @@ public class ShopAdapter extends BaseAdapter {
     private ArrayList<ShopItem> shopItems;
     private LayoutInflater mInflater;
     private Context mContext;
+    private ShopItem shopItem;
 
     public ShopAdapter(Context context, ArrayList<ShopItem> shopItems) {
         this.mContext = context;
@@ -69,10 +68,9 @@ public class ShopAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        final ShopItem shopItem = shopItems.get(i);
+        shopItem = shopItems.get(i);
         ViewHolder holder = null;
         if (view == null) {
-
             holder = new ViewHolder();
             view = mInflater.inflate(R.layout.item_card, null);
             holder.cardView = (CardView) view.findViewById(R.id.card_view);
@@ -95,35 +93,46 @@ public class ShopAdapter extends BaseAdapter {
         holder.ratingBar.setRating((float) shopItem.getRating());
         holder.tvLocation.setText(shopItem.getLocation());
         holder.tvLabShop.setText(shopItem.getTypeName());
-        Glide.with(mContext).load(App.BASE_URL + shopItem.getPic()).into(holder.IvShop);
-
+        Glide.with(mContext).load(App.SHOP_URL + shopItem.getPic()).into(holder.IvShop);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.v("ShopAdapter is id(onClick)",shopItem.getId()+"");
                 //获取数据
                 OkHttpUtils
-                        .post(App.BASE_URL+"/api/shop/post")
-                        .postJson("{'code':'1','msg':"+shopItem.getId()+"}")
+                        .post(App.BASE_URL + "/api/shop/post")
+                        .postJson("{'code':'2','msg':'" + shopItem.getId() + "'}")
                         .mediaType(MediaType.parse("application/json; charset=utf-8"))
                         .execute(new StringCallback() {
                             @Override
                             public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
+                                Log.v("ShopAdapter is Goods:", s);
                                 Gson gson = new Gson();
                                 goodsItems = gson.fromJson(s,
                                         new TypeToken<ArrayList<GoodsItem>>() {
                                         }.getType());
 
+
+                            }
+
+                            @Override
+                            public void onAfter(boolean isFromCache, @Nullable String s, Call call, @Nullable Response response, @Nullable Exception e) {
+                                super.onAfter(isFromCache, s, call, response, e);
+
+                                Intent intent = new Intent(mContext, ShoppingCartActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putParcelableArrayList("goodsItems", goodsItems);
+                                bundle.putInt("ShopId", shopItem.getId());
+                                bundle.putString("name", shopItem.getName());
+                                Log.v("ShopAdapter is id",shopItem.getId()+"");
+                                Log.v("ShopAdapter is name",shopItem.getName());
+                                intent.putExtras(bundle);
+                                Log.v("MainActivity", goodsItems.size() + "");
+                                mContext.startActivity(intent);
                             }
                         });
 
-                Intent intent = new Intent(mContext, ShoppingCartActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("goodsItems",goodsItems);
-                bundle.putInt("ShopId", shopItem.getId());
-                bundle.putString("name", shopItem.getName());
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
             }
         });
 

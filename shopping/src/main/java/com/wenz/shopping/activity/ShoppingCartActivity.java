@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -70,7 +71,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         Bundle bundle = getIntent().getExtras();
         int shopId = bundle.getInt("ShopId");
         String name = bundle.getString("name");
-        goodsItems = (ArrayList<GoodsItem>) bundle.getSerializable("goodsItems");
+        Log.v("ShoppingCartActivity is name",name);
+        goodsItems =  bundle.getParcelableArrayList("goodsItems");
         NetData(shopId);
 
         setTitle(name);
@@ -86,6 +88,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void NetData(int shopId) {
+
+
         dataList = new ArrayList<>();
         typeList = new ArrayList<>();
         //所有数据添加至dataList 不同类型数据添加至typeList

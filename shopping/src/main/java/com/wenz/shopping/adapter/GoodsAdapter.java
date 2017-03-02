@@ -1,5 +1,6 @@
 package com.wenz.shopping.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,12 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.wenz.shopping.App;
 import com.wenz.shopping.R;
 import com.wenz.shopping.activity.ShoppingCartActivity;
 import com.wenz.shopping.pojo.GoodsItem;
@@ -87,6 +91,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
         private TextView name,price,tvAdd,tvMinus,tvCount;
         private GoodsItem item;
         private RatingBar ratingBar;
+        private ImageView imageView;
 
         public ItemViewHolder(View itemView) {
             name = (TextView) itemView.findViewById(R.id.tvName);
@@ -95,6 +100,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             tvMinus = (TextView) itemView.findViewById(R.id.tvMinus);
             tvAdd = (TextView) itemView.findViewById(R.id.tvAdd);
             ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
+            imageView = (ImageView) itemView.findViewById(R.id.iv_goods);
             tvMinus.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
         }
@@ -107,6 +113,8 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             item.count = mContext.getSelectedItemCountById(item.id);
             tvCount.setText(String.valueOf(item.count));
             price.setText(nf.format(item.price));
+            Log.v("GoodsAdapter",item.getPic());
+            Glide.with(mContext).load(App.GOODS_URL+item.getPic()).into(imageView);
             if(item.count<1){
                 tvCount.setVisibility(View.GONE);
                 tvMinus.setVisibility(View.GONE);
