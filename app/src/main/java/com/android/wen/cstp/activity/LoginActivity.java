@@ -2,7 +2,6 @@ package com.android.wen.cstp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -36,7 +35,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void init() {
-        etUserName.setText(UserUtils.getUser(this).getUsername());//默认用户名为缓存用户名
+        etUserName.setText(UserUtils.getUser(this).getYhm());//默认用户名为缓存用户名
     }
 
     @OnClick({R.id.login, R.id.login_register,R.id.login_forget_pss})
@@ -52,7 +51,7 @@ public class LoginActivity extends BaseActivity {
                 String username = etUserName.getText().toString();
                 String password = etUserPsaaword.getText().toString();
                 User user = new User();
-                user.setUsername(username);
+                user.setYhm(username);
                 user.setPassword(password);
                 if (TextUtils.isEmpty(username) || password.trim().length() == 0) {
                     Toast.makeText(this, "用户名或密码不能为空.",Toast.LENGTH_SHORT).show();

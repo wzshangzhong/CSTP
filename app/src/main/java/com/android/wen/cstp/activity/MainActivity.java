@@ -13,30 +13,20 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.wen.cstp.adapter.HomeRecyclerAdapter;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.base.BaseActivity;
-import com.android.wen.cstp.pojo.DataWeather;
 import com.android.wen.cstp.pojo.User;
 import com.android.wen.cstp.util.UserUtils;
-import com.google.gson.Gson;
-import com.lzy.okhttputils.OkHttpUtils;
-import com.lzy.okhttputils.callback.StringCallback;
 
 import java.util.Calendar;
 
 import butterknife.ButterKnife;
-import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
     private RecyclerView mRecyclerView;

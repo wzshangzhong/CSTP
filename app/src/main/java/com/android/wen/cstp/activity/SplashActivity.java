@@ -34,7 +34,7 @@ public class SplashActivity extends BaseActivity {
                     public void run() {
                         Class<?> cls = null;
                         // 判断用户是否已成功登录
-                        if (UserUtils.getUser(SplashActivity.this).getUsername().length() > 0) {
+                        if (UserUtils.getUser(SplashActivity.this).getYhm().length() > 0) {
                             cls = MainActivity.class; // 已成功登录
                         } else {
                             cls = LoginActivity.class; // 未登录

@@ -20,7 +20,7 @@ public class UserUtils {
                 context.getSharedPreferences(PREFS_NAME, PREFS_MODE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("id", 1);
-        editor.putString("username", user.getUsername());
+        editor.putString("username", user.getYhm());
         editor.commit();
     }
 
@@ -32,7 +32,7 @@ public class UserUtils {
        // String imgUserString = preferences.getString("imgUser", "");
         User user = new User();
         user.setId(id);
-        user.setUsername(username);
+        user.setYhm(username);
         return user;
     }
 

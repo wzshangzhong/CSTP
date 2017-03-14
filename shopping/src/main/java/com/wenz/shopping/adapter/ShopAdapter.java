@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -26,6 +28,7 @@ import com.wenz.shopping.R;
 import com.wenz.shopping.activity.ShoppingCartActivity;
 import com.wenz.shopping.pojo.GoodsItem;
 import com.wenz.shopping.pojo.ShopItem;
+
 import java.util.ArrayList;
 
 import okhttp3.Call;
@@ -58,34 +61,28 @@ public class ShopAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return shopItems.get(i);
     }
 
     @Override
-    public long getItemId(int i) {
-        return 0;
+    public long getItemId(int position) {
+
+        return position;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         shopItem = shopItems.get(i);
         ViewHolder holder = null;
-        if (view == null) {
-            holder = new ViewHolder();
-            view = mInflater.inflate(R.layout.item_card, null);
-            holder.cardView = (CardView) view.findViewById(R.id.card_view);
-            holder.tvName = (TextView) view.findViewById(R.id.tv_name);
-            holder.tvShopAv = (TextView) view.findViewById(R.id.shop_av);
-            holder.ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
-            holder.tvLocation = (TextView) view.findViewById(R.id.tv_loc_shop);
-            holder.tvLabShop = (TextView) view.findViewById(R.id.tv_lab_shop);
-            holder.IvShop = (ImageView) view.findViewById(R.id.iv_shop);
-            view.setTag(holder);
-
-        } else {
-
-            holder = (ViewHolder) view.getTag();
-        }
+        holder = new ViewHolder();
+        view = mInflater.inflate(R.layout.item_card, viewGroup, false);
+        holder.cardView = (CardView) view.findViewById(R.id.card_view);
+        holder.tvName = (TextView) view.findViewById(R.id.tv_name);
+        holder.tvShopAv = (TextView) view.findViewById(R.id.shop_av);
+        holder.ratingBar = (RatingBar) view.findViewById(R.id.rating_bar);
+        holder.tvLocation = (TextView) view.findViewById(R.id.tv_loc_shop);
+        holder.tvLabShop = (TextView) view.findViewById(R.id.tv_lab_shop);
+        holder.IvShop = (ImageView) view.findViewById(R.id.iv_shop);
 
 
         holder.tvName.setText(shopItem.getName());
@@ -94,11 +91,18 @@ public class ShopAdapter extends BaseAdapter {
         holder.tvLocation.setText(shopItem.getLocation());
         holder.tvLabShop.setText(shopItem.getTypeName());
         Glide.with(mContext).load(App.SHOP_URL + shopItem.getPic()).into(holder.IvShop);
-
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.v("ShopAdapter is id(onClick)",shopItem.getId()+"");
+            }
+        });
+        //写上面点点击事件就是为了让这些空间不能点击
+        view.setClickable(false);
+
+       /* view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,shopItem.getName(),Toast.LENGTH_LONG).show();
                 //获取数据
                 OkHttpUtils
                         .post(App.BASE_URL + "/api/shop/post")
@@ -112,8 +116,6 @@ public class ShopAdapter extends BaseAdapter {
                                 goodsItems = gson.fromJson(s,
                                         new TypeToken<ArrayList<GoodsItem>>() {
                                         }.getType());
-
-
                             }
 
                             @Override
@@ -132,16 +134,13 @@ public class ShopAdapter extends BaseAdapter {
                                 mContext.startActivity(intent);
                             }
                         });
-
             }
-        });
-
+        });*/
 
         return view;
     }
 
     public static class ViewHolder {
-        public View view;
         private CardView cardView;
         public TextView tvName;
         public RatingBar ratingBar;

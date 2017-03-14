@@ -202,33 +202,22 @@ public class ReportActivity extends BaseActivity {
                 break;
             case R.id.tv_fzjg_report:
                 builder = new AlertDialog.Builder(this);
-                final String[] fzjgs = new String[]{
-                        "湘", "粤", "桂", "琼", "川", "贵", "云",
-                        "渝", "藏", "陕", "甘", "青", "宁", "新",
-                        "京", "津", "冀", "晋", "蒙", "辽", "吉",
-                        "黑", "沪", "苏", "浙", "皖", "闽", "赣",
-                        "鲁", "豫", "鄂"};
 
-                builder.setItems(fzjgs, new DialogInterface.OnClickListener() {
+                builder.setItems(GlobalApp.fzjgs, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvFzjgReport.setText(fzjgs[which]);
+                        tvFzjgReport.setText(GlobalApp.fzjgs[which]);
                     }
                 });
                 builder.create().show();
                 break;
             case R.id.tv_hpzl_report:
                 builder = new AlertDialog.Builder(this);
-                final String[] hpzls = new String[]{
-                        "A", "B", "C", "D", "E", "F", "G",
-                        "H", "I", "J", "K", "L", "M", "N",
-                        "O", "P", "Q", "R", "S", "T", "U",
-                        "V", "W", "X", "Y", "Z",};
 
-                builder.setItems(hpzls, new DialogInterface.OnClickListener() {
+                builder.setItems(GlobalApp.hpzls, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvHpzlReport.setText(hpzls[which]);
+                        tvHpzlReport.setText(GlobalApp.hpzls[which]);
                     }
                 });
                 builder.create().show();

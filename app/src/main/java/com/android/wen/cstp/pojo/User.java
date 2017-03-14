@@ -2,75 +2,65 @@ package com.android.wen.cstp.pojo;
 
 import java.io.Serializable;
 
-// 用户信息
+/**
+ * Created by Administrator on 2017/3/9.
+ */
 public class User implements Serializable {
-    private Integer id;
-    private String username;//车主姓名
-    private String password;//密码
-    private String device;//终端号
-    private String carNum;//车牌号码
-    private String BcankCar;//银行卡号
-    private String phone;//电话号码
-    private String idCard;//身份证
-    private String sex;//性别
-    private String birthday;//出生日期
-    private String locationNow;//现住址
-    private String unit;//工作单位
-    private String time;//创建时间
-    private String status;//状态
+    public int id;//		'ID'
+    public String lxdh;//		'联系电话（手机号码）'
+    public String xm;//	'姓名'
+    public String imsi;//		'imsi移动终端标识'
+    public String password;//	'密码'
+    public String sfzh;//    	'身份证号'
+    public String gzdw;//    	'工作单位'
+    public String rbsj;//    	'入表时间'
+    public String bb;//  		'app版本'
+    public String yhm;//    	'用户名或警号'
+    public String yhkh;//    	'银行卡号'
+    public String hphm;//    	'号牌号码'
+    public String xb;//	'性别'
+    public String csrq;//     	'出身日期'
+    public String xzz;//	'现住址'
+    public String yhlx;//  		'用户类型'
+    public String yyzt;//    	'状态'
+    public String dwdm;//    	'单位代码'
+    public String khh;//   		'开户行'
+    public String unitcode;//    	'大队代码'
+    public String fzjg;//    	'发证机关'
+    public String xxly;//    	'信息来源'
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", device='" + device + '\'' +
-                ", carNum='" + carNum + '\'' +
-                ", BcankCar='" + BcankCar + '\'' +
-                ", phone='" + phone + '\'' +
-                ", idCard='" + idCard + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthday='" + birthday + '\'' +
-                ", locationNow='" + locationNow + '\'' +
-                ", unit='" + unit + '\'' +
-                ", time='" + time + '\'' +
-                ", status='" + status + '\'' +
-                '}';
-    }
-/*zdh 	终端号*
-czxm 	车主姓名*
-hphm	号牌号码*
-yhkh	银行卡号*
-lxdh	联系电话
-sfzh	身份证号
-xb	性别
-csrq	出生日期
-xzz	现住址
-gzdw	工作单位
-rbsj	入表时间
-yzzt	状态
-fzjg	发证机关
-xxly	信息来源
-ssdw	所属单位*/
 
-    public User() {
+
+    public String getLxdh() {
+        return lxdh;
     }
 
-    public Integer getId() {
+    public void setLxdh(String lxdh) {
+        this.lxdh = lxdh;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getXm() {
+        return xm;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setXm(String xm) {
+        this.xm = xm;
+    }
+
+    public String getImsi() {
+        return imsi;
+    }
+
+    public void setImsi(String imsi) {
+        this.imsi = imsi;
     }
 
     public String getPassword() {
@@ -81,91 +71,170 @@ ssdw	所属单位*/
         this.password = password;
     }
 
-    public String getDevice() {
-        return device;
+    public String getSfzh() {
+        return sfzh;
     }
 
-    public void setDevice(String device) {
-        this.device = device;
+    public void setSfzh(String sfzh) {
+        this.sfzh = sfzh;
     }
 
-    public String getCarNum() {
-        return carNum;
+    public String getGzdw() {
+        return gzdw;
     }
 
-    public void setCarNum(String carNum) {
-        this.carNum = carNum;
+    public void setGzdw(String gzdw) {
+        this.gzdw = gzdw;
     }
 
-    public String getBcankCar() {
-        return BcankCar;
+    public String getRbsj() {
+        return rbsj;
     }
 
-    public void setBcankCar(String bcankCar) {
-        BcankCar = bcankCar;
+    public void setRbsj(String rbsj) {
+        this.rbsj = rbsj;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getBb() {
+        return bb;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setBb(String bb) {
+        this.bb = bb;
     }
 
-    public String getIdCadr() {
-        return idCard;
+    public String getYhm() {
+        return yhm;
     }
 
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
+    public void setYhm(String yhm) {
+        this.yhm = yhm;
     }
 
-    public String getSex() {
-        return sex;
+    public String getYhkh() {
+        return yhkh;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setYhkh(String yhkh) {
+        this.yhkh = yhkh;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public String getHphm() {
+        return hphm;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setHphm(String hphm) {
+        this.hphm = hphm;
     }
 
-    public String getLocationNow() {
-        return locationNow;
+    public String getXb() {
+        return xb;
     }
 
-    public void setLocationNow(String locationNow) {
-        this.locationNow = locationNow;
+    public void setXb(String xb) {
+        this.xb = xb;
     }
 
-    public String getUnit() {
-        return unit;
+    public String getCsrq() {
+        return csrq;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setCsrq(String csrq) {
+        this.csrq = csrq;
     }
 
-    public String getTime() {
-        return time;
+    public String getXzz() {
+        return xzz;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setXzz(String xzz) {
+        this.xzz = xzz;
     }
 
-    public String getStatus() {
-        return status;
+    public String getYhlx() {
+        return yhlx;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setYhlx(String yhlx) {
+        this.yhlx = yhlx;
     }
+
+    public String getYyzt() {
+        return yyzt;
+    }
+
+    public void setYyzt(String yyzt) {
+        this.yyzt = yyzt;
+    }
+
+    public String getDwdm() {
+        return dwdm;
+    }
+
+    public void setDwdm(String dwdm) {
+        this.dwdm = dwdm;
+    }
+
+    public String getKhh() {
+        return khh;
+    }
+
+    public void setKhh(String khh) {
+        this.khh = khh;
+    }
+
+    public String getUnitcode() {
+        return unitcode;
+    }
+
+    public void setUnitcode(String unitcode) {
+        this.unitcode = unitcode;
+    }
+
+    public String getFzjg() {
+        return fzjg;
+    }
+
+    public void setFzjg(String fzjg) {
+        this.fzjg = fzjg;
+    }
+
+    public String getXxly() {
+        return xxly;
+    }
+
+    public void setXxly(String xxly) {
+        this.xxly = xxly;
+    }
+
+    public User() {
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", lxdh='" + lxdh + '\'' +
+                ", xm='" + xm + '\'' +
+                ", imsi='" + imsi + '\'' +
+                ", password='" + password + '\'' +
+                ", sfzh='" + sfzh + '\'' +
+                ", gzdw='" + gzdw + '\'' +
+                ", rbsj='" + rbsj + '\'' +
+                ", bb='" + bb + '\'' +
+                ", yhm='" + yhm + '\'' +
+                ", yhkh='" + yhkh + '\'' +
+                ", hphm='" + hphm + '\'' +
+                ", xb='" + xb + '\'' +
+                ", csrq='" + csrq + '\'' +
+                ", xzz='" + xzz + '\'' +
+                ", yhlx='" + yhlx + '\'' +
+                ", yyzt='" + yyzt + '\'' +
+                ", dwdm='" + dwdm + '\'' +
+                ", khh='" + khh + '\'' +
+                ", unitcode='" + unitcode + '\'' +
+                ", fzjg='" + fzjg + '\'' +
+                ", xxly='" + xxly + '\'' +
+                '}';
+    }
+
 }

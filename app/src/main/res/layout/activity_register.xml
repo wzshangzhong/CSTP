@@ -46,6 +46,19 @@
 
                     <TextView
                         style="@style/relate_item_text"
+                        android:text="警号或用户名" />
+
+                    <EditText
+                        android:id="@+id/edit_siren"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入警号或用户名"
+                        android:singleLine="true" />
+                </RelativeLayout>
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
                         android:text="姓名" />
 
                     <EditText
@@ -127,12 +140,12 @@
                         android:id="@+id/imageView7" />
                     <TextView
                         android:id="@+id/tv_fzjg_reg"
-                        android:layout_width="40.0dip"
-                        android:layout_height="fill_parent"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="湘"
                         android:textColor="@color/black_light"
-                        android:textSize="14.0sp"
+                        android:textSize="14sp"
 
                         android:layout_alignParentTop="true"
                         android:layout_toRightOf="@+id/imageView7"
@@ -147,8 +160,8 @@
                         android:src="@drawable/more"
                         android:id="@+id/imageView8"
                         android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/tv_fzjg_reg"
-                        android:layout_toEndOf="@+id/tv_fzjg_reg" />
+                        android:layout_toRightOf="@id/tv_fzjg_reg"
+                        android:layout_toEndOf="@id/tv_fzjg_reg" />
 
                     <TextView
                         android:id="@+id/tv_hpzl_reg"
@@ -214,11 +227,19 @@
                         style="@style/relate_item_text"
                         android:text="性别" />
 
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
+
                     <TextView
                         android:id="@+id/tv_sex"
                         style="@style/relate_text_right"
                         android:background="@color/transparent"
-                        android:hint="选择性别"
+                        android:text="选择性别"
                         android:singleLine="true" />
                 </RelativeLayout>
                 <RelativeLayout style="@style/relate_common_item">
@@ -226,12 +247,18 @@
                     <TextView
                         style="@style/relate_item_text"
                         android:text="出生日期" />
-
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
                     <TextView
                         android:id="@+id/tv_birthday"
                         style="@style/relate_text_right"
                         android:background="@color/transparent"
-                        android:hint="请选择出生日期"
+                        android:text="请选择出生日期"
                         android:singleLine="true" />
                 </RelativeLayout>
                 <RelativeLayout style="@style/relate_common_item">
@@ -240,7 +267,7 @@
                         style="@style/relate_item_text"
                         android:text="现住址" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tv_location_now"
                         style="@style/relate_text_right"
                         android:background="@color/transparent"
