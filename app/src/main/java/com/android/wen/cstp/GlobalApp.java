@@ -20,6 +20,7 @@ public class GlobalApp extends Application {
     //http://192.168.1.102/ 本机电脑测试
     //public static final String BASE_URL = "http://192.168.1.102:9068/CarInfo/";
     public static final String BASE_URL = "http://192.168.0.113:8082/api/user/post";
+    public static final String FLIE_URL = "http://192.168.0.113:8082/api/downloadapk/GetFileFromWebApi";
     // public static final String BASE_URL = "http://211.149.209:80/CarInfo/";
 
     //http://192.168.1.102:9068/CarInfo/getCarInfo
@@ -39,10 +40,12 @@ public class GlobalApp extends Application {
             "V", "W", "X", "Y", "Z"};
     public static String[] units = new String[]{
             "岳麓区交警大队", "芙蓉区交警大队", "天心区交警大队", "开福区交警大队", "雨花区交警大队", "长沙县交警大队",
-            "望城区交警大队", "浏阳县交警大队", "宁乡县交警大队","长沙市交警大队","其他"
+            "望城区交警大队", "浏阳县交警大队", "宁乡县交警大队", "长沙市交警大队", "其他"
     };
     public static String[] sexs = new String[]{"男", "女", "其他"};
     public static String userPro = "12345";//用户协议
+
+
 
     //查询所有数据
     //public static final String BASE_URL = "http://192.168.1.111:9068/CarInfo/";
@@ -55,7 +58,10 @@ public class GlobalApp extends Application {
         if (!file.exists()) {
             file.mkdir();
         }
+
     }
+
+
 
     @Override
     public void onCreate() {
