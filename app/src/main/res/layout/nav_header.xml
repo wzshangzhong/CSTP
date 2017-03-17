@@ -99,8 +99,7 @@
                     style="@style/slidingmenu_line"
                     android:layout_below="@id/icon_jilu" />
             </RelativeLayout>
-
-
+            <!--   &lt;!&ndash;软件分享&ndash;&gt;
             <RelativeLayout
                 android:id="@+id/label_share"
                 style="@style/slidingmenu_relative">
@@ -123,6 +122,28 @@
                 <View
                     style="@style/slidingmenu_line"
                     android:layout_below="@id/icon_share" />
+            </RelativeLayout>-->
+            <!--修改用户信息-->
+            <RelativeLayout
+                android:id="@+id/rl_modify_user"
+                style="@style/slidingmenu_relative">
+
+                <ImageView
+                    android:id="@+id/icon_checkupdate_modify"
+                    style="@style/slidingmenu_icon"
+                    android:src="@drawable/l_sliding_update" />
+
+                <TextView
+                    android:id="@+id/text_checkupdate_modify"
+                    style="@style/slidingmenu_text"
+                    android:layout_toRightOf="@id/icon_checkupdate_modify"
+                    android:text="修改信息" />
+
+                <ImageView style="@style/jiantou" />
+
+                <View
+                    style="@style/slidingmenu_line"
+                    android:layout_below="@id/icon_checkupdate_modify" />
             </RelativeLayout>
             <!--检查更新-->
             <RelativeLayout
@@ -182,6 +203,7 @@
                     style="@style/slidingmenu_line"
                     android:layout_below="@id/icon_loginout" />
             </RelativeLayout>
+
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -18,6 +18,7 @@ import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.base.BaseActivity;
 import com.android.wen.cstp.pojo.User;
+import com.android.wen.cstp.util.UserUtils;
 import com.android.wen.cstp.view.DateTimePickDialogUtil;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -94,7 +95,7 @@ public class RegisterActivity extends BaseActivity {
                 if (registerAgree.isChecked()) {
                     Submit();
                 } else {
-                    Toast.makeText(RegisterActivity.this,"请确认用户协议是否阅读",Toast.LENGTH_LONG).show();
+                    UserUtils.showToast(RegisterActivity.this,"请确认用户协议是否阅读");
                 }
 
                 break;
@@ -154,51 +155,51 @@ public class RegisterActivity extends BaseActivity {
 
     public void Submit() {
         if (editName.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请填写真实姓名", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请填写真实姓名");
             return;
         }
         if (edtIdCard.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请填写身份证号码", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请填写身份证号码");
             return;
         }
         if (editMobilePhone.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请填写手机号码", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请填写手机号码");
             return;
         }
         if (tvMobileUnit.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请填写工作单位", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请填写工作单位");
             return;
         }
         if (etMobilePassword.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请填写密码", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请填写密码");
             return;
         }
         if (etMobilePasswords.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请确认密码", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请确认密码");
             return;
         }
         if (!etMobilePassword.getText().toString().equals(etMobilePasswords.getText().toString())) {
-            Toast.makeText(this, "两次密码不同", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "两次密码不同");
             return;
         }
         if (registerAgree.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请阅读注意事项", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请阅读注意事项");
             return;
         }
         if (etBankCar.getText().toString().isEmpty()) {
-            Toast.makeText(this, "银行卡号不能为空（此为举报奖励用）", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "银行卡号不能为空（此为举报奖励用）");
             return;
         }
         if (tvSex.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请选择性别", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请选择性别");
             return;
         }
         if (tvBirthday.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请选择出生日期", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请选择出生日期");
             return;
         }
         if (tvLocationNow.getText().toString().isEmpty()) {
-            Toast.makeText(this, "请选择现住址", Toast.LENGTH_LONG).show();
+            UserUtils.showToast(this, "请选择现住址");
             return;
         }
         //提交数据
@@ -257,7 +258,7 @@ public class RegisterActivity extends BaseActivity {
                         try {
                             //解读Json
                             JSONObject jo= new JSONObject(s);
-                            Toast.makeText(RegisterActivity.this, jo.getString("msg"), Toast.LENGTH_LONG).show();
+                            UserUtils.showToast(RegisterActivity.this, jo.getString("msg"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -270,7 +271,7 @@ public class RegisterActivity extends BaseActivity {
                     public void onError(boolean isFromCache, Call call, @Nullable Response response,
                                         @Nullable Exception e) {
                         super.onError(isFromCache, call, response, e);
-                        Toast.makeText(RegisterActivity.this, "网络异常，请选择合适网络环境", Toast.LENGTH_LONG).show();
+                        UserUtils.showToast(RegisterActivity.this, "网络异常，请选择合适网络环境");
                         Log.v("RegisterActivity is error", response.toString());
                         Log.v("RegisterActivity is error", e.toString());
                     }

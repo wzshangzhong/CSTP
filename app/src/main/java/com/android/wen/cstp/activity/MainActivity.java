@@ -26,16 +26,41 @@ import com.android.wen.cstp.util.UserUtils;
 
 import java.util.Calendar;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
-    private RecyclerView mRecyclerView;
-    private DrawerLayout drawerLayout;//抽屉
-    private ImageView ivMineHome;
-    private TextView tvTimeHome;//时分秒  未几十刷新
-    private TextView tvDateHome;//月日星期
-    private TextView tvWeatherHome;//天气和温度
-    private TextView tvAirHome;//空气质量
+    @Bind(R.id.rv_content_home)
+    RecyclerView mRecyclerView;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;//抽屉
+    @Bind(R.id.nv_view)
+    NavigationView navView;
+    @Bind(R.id.iv_mine_home)
+    ImageView ivMineHome;
+    @Bind(R.id.tv_time_home)
+    TextView tvTimeHome;//时分秒  未几十刷新
+    @Bind(R.id.tv_date_home)
+    TextView tvDateHome;//月日星期
+    @Bind(R.id.tv_weather_home)
+    TextView tvWeatherHome;//天气和温度
+    @Bind(R.id.tv_air_home)
+    TextView tvAirHome;//空气质量
+
+   /* //导航栏
+    @Bind(R.id.image_view)
+    ImageView imgView;
+    @Bind(R.id.tv_username)
+    TextView tvUsername;
+    @Bind(R.id.rl_report_nh)
+    RelativeLayout rlReportNh;
+    @Bind(R.id.rl_inquire_nh)
+    RelativeLayout rlInquireNh;
+    @Bind(R.id.rl_checkupdate_nh)
+    RelativeLayout rlCheckUpdateNh;
+    @Bind(R.id.rl_loginout_nh)
+    RelativeLayout rlLoginOutNh;*/
+
     //线程msgKey值
     private static final int msgKey1 = 1;
     private Handler mHandler = new Handler() {
@@ -65,13 +90,13 @@ public class MainActivity extends BaseActivity {
 
     private void initView() {
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);//初始化抽屉
+        // drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);//初始化抽屉
         // 8.1 导航视图
-        NavigationView navView = (NavigationView) findViewById(R.id.nv_view);
+        // NavigationView navView = (NavigationView) findViewById(R.id.nv_view);
         if (navView != null) {
             setNavView(navView);
         }
-        ivMineHome = (ImageView) findViewById(R.id.iv_mine_home);
+        // ivMineHome = (ImageView) findViewById(R.id.iv_mine_home);
         ivMineHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,9 +105,9 @@ public class MainActivity extends BaseActivity {
         });
 
         //时间
-        tvTimeHome = (TextView) findViewById(R.id.tv_time_home);
+        // tvTimeHome = (TextView) findViewById(R.id.tv_time_home);
         new TimeThread().start();//一秒刷新一次
-        tvDateHome = (TextView) findViewById(R.id.tv_date_home);
+        //tvDateHome = (TextView) findViewById(R.id.tv_date_home);
         Calendar c = Calendar.getInstance();
         int year = c.get(Calendar.YEAR);//年
         int month = c.get(Calendar.MONTH);//月
@@ -102,12 +127,12 @@ public class MainActivity extends BaseActivity {
         tvDateHome.setText(date);
 
         //设置天气
-        tvWeatherHome = (TextView) findViewById(R.id.tv_weather_home);
-        tvAirHome = (TextView) findViewById(R.id.tv_air_home);
+        // tvWeatherHome = (TextView) findViewById(R.id.tv_weather_home);
+        //tvAirHome = (TextView) findViewById(R.id.tv_air_home);
         //getWeather();
 
         //菜单数据
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_content_home);
+       // mRecyclerView = (RecyclerView) findViewById(R.id.rv_content_home);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -116,13 +141,15 @@ public class MainActivity extends BaseActivity {
 
     private void setNavView(NavigationView navView) {
         View view = navView.getHeaderView(0);
-        //-- 左侧抽屉导航视图 (用户名 / 图片) ------------------------------
+        //-- 左侧抽屉导航视图 (用户名 / 图片) --
+
         ImageView imgView = (ImageView) view.findViewById(R.id.image_view);
         TextView tvUsername = (TextView) view.findViewById(R.id.tv_username);
         RelativeLayout rlReportNh = (RelativeLayout) view.findViewById(R.id.rl_report_nh);//举报记录
         RelativeLayout rlInquireNh = (RelativeLayout) view.findViewById(R.id.rl_inquire_nh);//违法记录
         RelativeLayout rlCheckUpdateNh = (RelativeLayout) view.findViewById(R.id.rl_checkupdate_nh);
         RelativeLayout rlLoginOutNh = (RelativeLayout) view.findViewById(R.id.rl_loginout_nh);
+        RelativeLayout rlModifyUser = (RelativeLayout) view.findViewById(R.id.rl_modify_user);
         imgView.setImageResource(R.mipmap.ic_launcher);
         tvUsername.setText("未设置");
 
@@ -147,6 +174,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, InquireActivity.class));
+            }
+        });
+        rlModifyUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ModifyActivity.class));
             }
         });
         //检查更新

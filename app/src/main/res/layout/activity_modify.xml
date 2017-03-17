@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back_gray"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_top" />
+
+    <ScrollView style="@style/scrollview_common">
+
+        <LinearLayout style="@style/linear_common">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="top"
+                    android:text="*"
+                    android:textColor="#ffff7f00"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:text="修改信息需与车管所登记信息一致。若您的信息与车管所登记的信息不一致，请及时到车管所更新"
+                    android:textColor="#ffff7f00"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linear_common"
+                android:background="@color/white">
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="警号或用户名" />
+
+                    <EditText
+                        android:id="@+id/edit_siren_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入警号或用户名"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="姓名" />
+
+                    <EditText
+                        android:id="@+id/edit_name_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入真实姓名"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <View style="@style/item_view" />
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="身份证号码" />
+
+                    <EditText
+                        android:id="@+id/edt_id_card_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入身份证号码"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <View style="@style/item_view" />
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="手机号码" />
+
+                    <EditText
+                        android:id="@+id/edit_mobile_phone_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入手机号码"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        android:id="@id/textView2"
+                        style="@style/relate_item_text"
+                        android:text="车牌号码" />
+
+                    <EditText
+                        android:id="@+id/et_hphm_modify"
+                        style="@style/relate_text_right"
+                        android:layout_width="100dp"
+                        android:background="@color/transparent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:hint="请输入您的牌号"
+                        android:maxLength="5"
+                        android:singleLine="true" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_toLeftOf="@+id/et_hphm_report"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"
+                        android:layout_centerVertical="true"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_toEndOf="@id/textView2"
+                        android:layout_toRightOf="@id/textView2"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_fzjg_modify"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView7"
+                        android:layout_toRightOf="@+id/imageView7"
+                        android:gravity="center"
+
+                        android:text="湘"
+                        android:textColor="@color/black_light"
+                        android:textSize="14sp" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toEndOf="@id/tv_fzjg_modify"
+                        android:layout_toRightOf="@id/tv_fzjg_modify"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_hpzl_modify"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView8"
+                        android:layout_toRightOf="@+id/imageView8"
+                        android:gravity="center"
+                        android:text="A"
+                        android:textColor="@color/black_light"
+                        android:textSize="14.0sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="所在单位" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_unit_modify"
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/imageView5"
+                        android:gravity="center|right"
+                        android:text="岳麓大队"
+                        android:textAppearance="?android:textAppearanceLarge"
+                        android:textColor="@color/black_light"
+                        android:textSize="14sp" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="银行卡号" />
+
+                    <EditText
+                        android:id="@+id/tv_bank_car_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请填写银行卡号"
+                        android:inputType="number"
+                        android:maxLength="19"
+                        android:minLines="19"
+                        android:singleLine="true" />
+
+
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="性别" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_sex_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:singleLine="true"
+                        android:text="选择性别" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="出生日期" />
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:src="@drawable/more" />
+
+                    <TextView
+                        android:id="@+id/tv_birthday_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:singleLine="true"
+                        android:text="请选择出生日期" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="现住址" />
+
+                    <EditText
+                        android:id="@+id/tv_location_now_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请填写住址"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#dddd"
+                    android:padding="16dp"
+                    android:text="设置密码"
+                    android:textColor="#ffff7f00"
+                    android:textSize="12sp" />
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="设置密码" />
+
+                    <EditText
+                        android:id="@+id/et_password_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请输入密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+                </RelativeLayout>
+
+                <RelativeLayout style="@style/relate_common_item">
+
+                    <TextView
+                        style="@style/relate_item_text"
+                        android:text="确认密码" />
+
+                    <EditText
+                        android:id="@+id/et_passwords_modify"
+                        style="@style/relate_text_right"
+                        android:background="@color/transparent"
+                        android:hint="请确认密码"
+                        android:inputType="textPassword"
+                        android:singleLine="true" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_modify"
+                style="@style/business_submit"
+                android:text="修   改" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:paddingLeft="10dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1">
+
+                    <CheckBox
+                        android:id="@+id/modify_agree"
+                        android:layout_width="130dp"
+                        android:layout_height="40dp"
+                        android:background="@null"
+                        android:button="@null"
+                        android:checked="false"
+                        android:drawableLeft="@drawable/bg_login_checkbox"
+                        android:drawablePadding="4dp"
+                        android:text="已阅读并同意"
+                        android:textColor="@color/top_text_gray"
+                        android:textSize="14sp"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/txt_register_protocol"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/modify_agree"
+                        android:text="长沙交警使用协议"
+                        android:textColor="@color/back_title_blue"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

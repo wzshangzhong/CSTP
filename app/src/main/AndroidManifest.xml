@@ -3,9 +3,9 @@
     package="com.android.wen.cstp"
     android:versionCode="1"
     android:versionName="1">
+
     <!-- 获取机型信息权限 -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -25,8 +25,6 @@
     <!-- 相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
 
     <application
         android:name=".GlobalApp"
@@ -61,7 +59,8 @@
         <activity android:name=".activity.ItemReportActivity" />
         <activity android:name=".activity.ReportsSearchActivity" />
         <activity android:name=".activity.SearchItemActivity" />
-        <activity android:name=".activity.ResetPasswordActivity"/>
+        <activity android:name=".activity.ResetPasswordActivity" />
+        <activity android:name=".activity.ModifyActivity"></activity>
     </application>
 
 </manifest>
