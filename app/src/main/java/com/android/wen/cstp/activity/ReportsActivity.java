@@ -23,6 +23,7 @@ import com.android.wen.cstp.adapter.WfjbAdapter;
 import com.android.wen.cstp.base.BaseActivity;
 import com.android.wen.cstp.pojo.CSTPReportList;
 import com.android.wen.cstp.pojo.CstpWfjb;
+import com.android.wen.cstp.pojo.WFJB;
 import com.android.wen.cstp.util.ComparableUtil;
 import com.android.wen.cstp.view.LoadDialog;
 import com.google.gson.Gson;
@@ -48,6 +49,7 @@ public class ReportsActivity extends BaseActivity {
     private LoadDialog dialog;
     private RecyclerView rvItemReports;
     private CSTPReportAdapter mCSTPReportAdapter;
+    private ArrayList<WFJB> wfjbs;
     private CSTPReportList mCSTPReportList;//网络数据
     private ArrayList<CSTPReportList.DataBean> dataBeenList;//需要显示的数据
 
@@ -72,7 +74,7 @@ public class ReportsActivity extends BaseActivity {
         setContentView(R.layout.activity_reports);
         initView();
         //获取数据库数据
-        initDate();
+        postData();
     }
 
     private void initView() {
@@ -102,95 +104,10 @@ public class ReportsActivity extends BaseActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });
-
-       /* //刷新加载
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_cont);
-        //设置刷新时动画的颜色，可以设置4个
-        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
-                android.R.color.holo_red_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_green_light);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                //tv.setText("正在刷新");
-                // postData();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //tv.setText("刷新完成");
-                        swipeRefreshLayout.setRefreshing(false);
-                        Toast.makeText(ReportsActivity.this, "暂无数据", Toast.LENGTH_SHORT).show();
-                    }
-                }, 6000);
-            }
-        });
-
-
-        dialog = new LoadDialog(ReportsActivity.this, "", "正在获取数据...");
-        dialog.show();
-*/
-
-       /* dataBeenList = new ArrayList<>();
-        mCSTPReportAdapter = new CSTPReportAdapter(this, dataBeenList);
-       */
-        cstpWfjbs = new ArrayList<>();
-        wfjbAdapter = new WfjbAdapter(this, cstpWfjbs);
-        rvItemReports = (RecyclerView) findViewById(R.id.rv_item_reports);
-        rvItemReports.setLayoutManager(new LinearLayoutManager(this));
-        rvItemReports.setAdapter(wfjbAdapter);
-        //rvItemReports.setAdapter(mCSTPReportAdapter);
-    }
-
-    private void initDate() {
-        //postData();
-        SQLiteData();
-    }
-
-    private void SQLiteData() {
-        mHelper = new DaoMaster.DevOpenHelper(this, "test-db", null);
-        db = mHelper.getWritableDatabase();
-        mDaoMaster = new DaoMaster(db);
-        mDaoSession = mDaoMaster.newSession();
-        // 得到 Dao 对象，数据库的 CRUD 操作都是通过此对象来进行
-        mWfjbDao = mDaoSession.getCstp_wfjbDao();
-
-        cursor = db.query(mWfjbDao.getTablename(), mWfjbDao.getAllColumns(), null, null, null, null, null);
-        // 通过 PersonDao 的静态内部类得到字段所对应的 列名
-
-        // 通过构建 QueryBuilder 来实现查询功能
-        QueryBuilder<cstp_wfjb> queryBuilder = mWfjbDao.queryBuilder().where(cstp_wfjbDao.Properties.Mark.eq("mark"));
-        // .list() 方法会返回实体类集合
-        Log.v("ReportsActivity", "SQLiteData");
-        Log.v("ReportsActivity", "SQLiteData "+queryBuilder.list().size());
-
-
-        for (int i = 0; i < queryBuilder.list().size(); i++) {
-            CstpWfjb cstpWfjb = new CstpWfjb();
-            cstpWfjb.setId(queryBuilder.list().get(i).getId());
-            cstpWfjb.setMark("mark");
-            cstpWfjb.setWfsj(queryBuilder.list().get(i).getWfsj());
-            cstpWfjb.setWfld(queryBuilder.list().get(i).getWfld());
-            cstpWfjb.setWfch(queryBuilder.list().get(i).getWfch());
-            cstpWfjb.setQksm(queryBuilder.list().get(i).getQksm());
-            cstpWfjb.setJbr(queryBuilder.list().get(i).getJbr());
-            cstpWfjb.setSfhm(queryBuilder.list().get(i).getSfhm());
-            cstpWfjb.setLxdh(queryBuilder.list().get(i).getLxdh());
-            cstpWfjb.setZqdw(queryBuilder.list().get(i).getZqdw());
-            cstpWfjb.setImage1_path(queryBuilder.list().get(i).getImage1_path());
-            cstpWfjb.setImage2_path(queryBuilder.list().get(i).getImage2_path());
-            cstpWfjb.setImage3_path(queryBuilder.list().get(i).getImage3_path());
-            cstpWfjbs.add(cstpWfjb);
-            Log.v("ReportsActivity", cstpWfjb.getJbr());
-            wfjbAdapter.notifyDataSetChanged();
-        }
-
-
-    }
+        });}
 
     private void postData() {
-        OkHttpUtils.get(GlobalApp.BASE_URL + "getCarInfo")
+        OkHttpUtils.get(GlobalApp.USER_URL + "getCarInfo")
                 .cacheKey("getCarInfo")//添加缓存,可能是从缓存中读取值
                 .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)//貌似要选缓存模式
                 .execute(new StringCallback() {
@@ -256,6 +173,94 @@ public class ReportsActivity extends BaseActivity {
                 });
 
     }
+
+
+     /*  *//* //刷新加载
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_cont);
+        //设置刷新时动画的颜色，可以设置4个
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_light,
+                android.R.color.holo_red_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_green_light);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //tv.setText("正在刷新");
+                // postData();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        //tv.setText("刷新完成");
+                        swipeRefreshLayout.setRefreshing(false);
+                        Toast.makeText(ReportsActivity.this, "暂无数据", Toast.LENGTH_SHORT).show();
+                    }
+                }, 6000);
+            }
+        });
+
+
+        dialog = new LoadDialog(ReportsActivity.this, "", "正在获取数据...");
+        dialog.show();
+*//*
+
+       *//* dataBeenList = new ArrayList<>();
+        mCSTPReportAdapter = new CSTPReportAdapter(this, dataBeenList);
+       *//*
+        cstpWfjbs = new ArrayList<>();
+        wfjbAdapter = new WfjbAdapter(this, cstpWfjbs);
+        rvItemReports = (RecyclerView) findViewById(R.id.rv_item_reports);
+        rvItemReports.setLayoutManager(new LinearLayoutManager(this));
+        rvItemReports.setAdapter(wfjbAdapter);
+        //rvItemReports.setAdapter(mCSTPReportAdapter);
+    }
+
+    private void initDate() {
+        //postData();
+        SQLiteData();
+    }
+
+    private void SQLiteData() {
+        mHelper = new DaoMaster.DevOpenHelper(this, "test-db", null);
+        db = mHelper.getWritableDatabase();
+        mDaoMaster = new DaoMaster(db);
+        mDaoSession = mDaoMaster.newSession();
+        // 得到 Dao 对象，数据库的 CRUD 操作都是通过此对象来进行
+        mWfjbDao = mDaoSession.getCstp_wfjbDao();
+
+        cursor = db.query(mWfjbDao.getTablename(), mWfjbDao.getAllColumns(), null, null, null, null, null);
+        // 通过 PersonDao 的静态内部类得到字段所对应的 列名
+
+        // 通过构建 QueryBuilder 来实现查询功能
+        QueryBuilder<cstp_wfjb> queryBuilder = mWfjbDao.queryBuilder().where(cstp_wfjbDao.Properties.Mark.eq("mark"));
+        // .list() 方法会返回实体类集合
+        Log.v("ReportsActivity", "SQLiteData");
+        Log.v("ReportsActivity", "SQLiteData "+queryBuilder.list().size());
+
+
+        for (int i = 0; i < queryBuilder.list().size(); i++) {
+            CstpWfjb cstpWfjb = new CstpWfjb();
+            cstpWfjb.setId(queryBuilder.list().get(i).getId());
+            cstpWfjb.setMark("mark");
+            cstpWfjb.setWfsj(queryBuilder.list().get(i).getWfsj());
+            cstpWfjb.setWfld(queryBuilder.list().get(i).getWfld());
+            cstpWfjb.setWfch(queryBuilder.list().get(i).getWfch());
+            cstpWfjb.setQksm(queryBuilder.list().get(i).getQksm());
+            cstpWfjb.setJbr(queryBuilder.list().get(i).getJbr());
+            cstpWfjb.setSfhm(queryBuilder.list().get(i).getSfhm());
+            cstpWfjb.setLxdh(queryBuilder.list().get(i).getLxdh());
+            cstpWfjb.setZqdw(queryBuilder.list().get(i).getZqdw());
+            cstpWfjb.setImage1_path(queryBuilder.list().get(i).getImage1_path());
+            cstpWfjb.setImage2_path(queryBuilder.list().get(i).getImage2_path());
+            cstpWfjb.setImage3_path(queryBuilder.list().get(i).getImage3_path());
+            cstpWfjbs.add(cstpWfjb);
+            Log.v("ReportsActivity", cstpWfjb.getJbr());
+            wfjbAdapter.notifyDataSetChanged();
+        }
+
+
+    }*/
+
+
 
     /**
      * 刷新

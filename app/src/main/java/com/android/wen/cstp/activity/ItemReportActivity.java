@@ -44,13 +44,13 @@ public class ItemReportActivity extends AppCompatActivity {
         tvWfsj.setText("违法时间："+dataBean.getWFSJ());
         tvWfbm.setText("违法编码："+dataBean.getWFBH());
 
-        Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+        Glide.with(this).load(GlobalApp.USER_URL + "FileContentResult?wfbh="
                 + dataBean.getWFBH() + "&num=0").into(imageView0);
-        Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+        Glide.with(this).load(GlobalApp.USER_URL + "FileContentResult?wfbh="
                 + dataBean.getWFBH() + "&num=1").into(imageView1);
-        Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+        Glide.with(this).load(GlobalApp.USER_URL + "FileContentResult?wfbh="
                 + dataBean.getWFBH() + "&num=2").into(imageView2);
-        Glide.with(this).load(GlobalApp.BASE_URL + "FileContentResult?wfbh="
+        Glide.with(this).load(GlobalApp.USER_URL + "FileContentResult?wfbh="
                 + dataBean.getWFBH() + "&num=3").into(imageView3);
 
         }else if(cstpWfjb!=null&&cstpWfjb.getWfch().length()>0) {

@@ -19,7 +19,9 @@ import okhttp3.OkHttpClient;
 public class GlobalApp extends Application {
     //http://192.168.1.102/ 本机电脑测试
     //public static final String BASE_URL = "http://192.168.1.102:9068/CarInfo/";
-    public static final String BASE_URL = "http://192.168.0.113:8082/api/user/post";
+    public static final String USER_URL = "http://192.168.0.113:8082/api/user/post";
+    public static final String WFJB_URL = "http://192.168.0.113:8082/api/wfxx/post";
+    public static final String WFJBCX_URL = "http://192.168.0.113:8082/api/wfjbcx/post";
     public static final String FLIE_URL = "http://192.168.0.113:8082/api/downloadapk/GetFileFromWebApi";
     // public static final String BASE_URL = "http://211.149.209:80/CarInfo/";
 
@@ -42,9 +44,27 @@ public class GlobalApp extends Application {
             "岳麓区交警大队", "芙蓉区交警大队", "天心区交警大队", "开福区交警大队", "雨花区交警大队", "长沙县交警大队",
             "望城区交警大队", "浏阳县交警大队", "宁乡县交警大队", "长沙市交警大队", "其他"
     };
+    public static String[] wfxws = new String[]{
+            "故意遮挡机动车号牌", "故意污损机动车号牌", "使用其他机动车号牌",
+            "使用伪造、变造机动车号牌", "无证或驾驶证被扣留期间驾驶",
+            "未按规定安装机动车号牌", "工程车装载超出栏版", "工程车闯红灯",
+            "工程车逆向行驶"};
+    public static String[] xsfxs = new String[]{
+            "东到西", "东到南", "东到北",
+            "西到东", "西到南", "西到北",
+            "南到东", "南到西", "南到北",
+            "北到东", "北到西", "北到南",};
+    public static String[] cllxs = new String[]{
+            "小型汽车", "大型汽车", "普通摩托车",
+            "挂车", "低速车", "轻便摩托车",
+            "教练汽车", "教练摩托车"};
+    public static String[] csyss = new String[]{
+            "灰色", "黄色", "粉色",
+            "紫色", "绿色", "红色",
+            "蓝色", "棕色", "黑色",
+            "白色", "橙色", "不确定",};
     public static String[] sexs = new String[]{"男", "女", "其他"};
     public static String userPro = "12345";//用户协议
-
 
 
     //查询所有数据
@@ -60,7 +80,6 @@ public class GlobalApp extends Application {
         }
 
     }
-
 
 
     @Override

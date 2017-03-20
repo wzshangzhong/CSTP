@@ -82,7 +82,7 @@ public class SplashActivity extends BaseActivity {
 
                         int versionCode = packInfo.versionCode;
 
-                        OkHttpUtils.post(GlobalApp.BASE_URL)
+                        OkHttpUtils.post(GlobalApp.USER_URL)
                                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                                 .postJson("{'code':'7','msg':{'version':'"+versionCode+"'}}")
                                 .execute(new StringCallback() {

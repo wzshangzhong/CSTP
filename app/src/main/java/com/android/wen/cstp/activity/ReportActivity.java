@@ -14,7 +14,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +28,9 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.base.BaseActivity;
+import com.android.wen.cstp.pojo.WFJB;
 import com.android.wen.cstp.util.MD5;
+import com.android.wen.cstp.util.UserUtils;
 import com.android.wen.cstp.view.DateTimePickDialogUtil;
 import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.util.ImageTools;
@@ -43,6 +44,7 @@ import com.sivan.greendaopractice.DaoMaster;
 import com.sivan.greendaopractice.DaoSession;
 import com.sivan.greendaopractice.cstp_wfjb;
 import com.sivan.greendaopractice.cstp_wfjbDao;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -51,6 +53,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import javax.microedition.khronos.opengles.GL;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -120,15 +125,17 @@ public class ReportActivity extends BaseActivity {
     private DaoMaster mDaoMaster;
     private cstp_wfjbDao mWfjbDao;
     private Cursor cursor;
+    private WFJB wfjb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
         ButterKnife.bind(this);
-        init();
+        initView();
     }
 
-    private void init() {
+    private void initView() {
         topTitle.setText("违法举报");//设置头标
         //设置时间
         Calendar c = Calendar.getInstance();
@@ -147,9 +154,16 @@ public class ReportActivity extends BaseActivity {
         // 临时 图片文件
         file = new File(Environment.getExternalStorageDirectory(), "/CSTP/image.jpg");
 
+        //显示默认用户信息
+        etNameReport.setText(UserUtils.getUser(this).getXm());  //举报人名字
+        etPhoneReport.setText(UserUtils.getUser(this).getLxdh());  //举报人手机号码
+        etCardReport.setText(UserUtils.getUser(this).getSfzh());  //举报人身份号码
+        tvUnitsReport.setText(UserUtils.getUser(this).getGzdw()); //值勤单位
+
         //放数据库的
         // mDaoGenerator = new DaoGenerator(this);
     }
+
     //设置地点
     private void postion() {
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
@@ -224,16 +238,12 @@ public class ReportActivity extends BaseActivity {
                 break;
             case R.id.tv_wfxw_report:
                 builder = new AlertDialog.Builder(this);
-                final String[] wfxws = new String[]{
-                        "故意遮挡机动车号牌", "故意污损机动车号牌", "使用其他机动车号牌",
-                        "使用伪造、变造机动车号牌", "无证或驾驶证被扣留期间驾驶",
-                        "未按规定安装机动车号牌", "工程车装载超出栏版", "工程车闯红灯",
-                        "工程车逆向行驶"};
 
-                builder.setItems(wfxws, new DialogInterface.OnClickListener() {
+
+                builder.setItems(GlobalApp.wfxws, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvWfxwReport.setText(wfxws[which]);
+                        tvWfxwReport.setText(GlobalApp.wfxws[which]);
                     }
                 });
                 builder.create().show();
@@ -250,30 +260,22 @@ public class ReportActivity extends BaseActivity {
                 break;
             case R.id.tv_xsfx_report://方向
                 builder = new AlertDialog.Builder(this);
-                final String[] xsfxs = new String[]{
-                        "东到西", "东到南", "东到北",
-                        "西到东", "西到南", "西到北",
-                        "南到东", "南到西", "南到北",
-                        "北到东", "北到西", "北到南",};
 
-                builder.setItems(xsfxs, new DialogInterface.OnClickListener() {
+
+                builder.setItems(GlobalApp.xsfxs, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvXsfxReport.setText(xsfxs[which]);
+                        tvXsfxReport.setText(GlobalApp.xsfxs[which]);
                     }
                 });
                 builder.create().show();
                 break;
             case R.id.tv_cllx_report://车辆类型
                 builder = new AlertDialog.Builder(this);
-                final String[] cllxs = new String[]{
-                        "小型汽车", "大型汽车", "普通摩托车",
-                        "挂车", "低速车", "轻便摩托车",
-                        "教练汽车", "教练摩托车"};
-                builder.setItems(cllxs, new DialogInterface.OnClickListener() {
+                builder.setItems(GlobalApp.cllxs, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvCllxReport.setText(cllxs[which]);
+                        tvCllxReport.setText(GlobalApp.cllxs[which]);
                     }
                 });
                 builder.create().show();
@@ -281,16 +283,10 @@ public class ReportActivity extends BaseActivity {
                 break;
             case R.id.tv_csys_report://车身颜色
                 builder = new AlertDialog.Builder(this);
-                final String[] csyss = new String[]{
-                        "灰色", "黄色", "粉色",
-                        "紫色", "绿色", "红色",
-                        "蓝色", "棕色", "黑色",
-                        "白色", "橙色", "不确定",};
-
-                builder.setItems(csyss, new DialogInterface.OnClickListener() {
+                builder.setItems(GlobalApp.csyss, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvCsysReport.setText(csyss[which]);
+                        tvCsysReport.setText(GlobalApp.csyss[which]);
                     }
                 });
                 builder.create().show();
@@ -306,14 +302,10 @@ public class ReportActivity extends BaseActivity {
                 break;
             case R.id.tv_units_report://值勤单位
                 builder = new AlertDialog.Builder(this);
-                final String[] zqdws = new String[]{
-                        "岳麓大队", "天心大队", "开福大队", "芙蓉大队", "雨花交通警察大队",
-                        "高新区大队", "其他"};
-
-                builder.setItems(zqdws, new DialogInterface.OnClickListener() {
+                builder.setItems(GlobalApp.units, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tvUnitsReport.setText(zqdws[which]);
+                        tvUnitsReport.setText(GlobalApp.units[which]);
                     }
                 });
                 builder.create().show();
@@ -325,16 +317,34 @@ public class ReportActivity extends BaseActivity {
     }
 
     private void submitDate() {
-        String time = tvTimeReport.getText().toString();//违法时间
-        String place = etPlaceReport.getText().toString();//违法地点
-        String wfch = tvFzjgReport.getText().toString()
+        wfjb = new WFJB();
+        //发证机关
+        String fzjg = tvFzjgReport.getText().toString() +
+                tvHpzlReport.getText().toString();
+        wfjb.setFzjg(fzjg);
+        wfjb.setHphm(tvHpzlReport.getText().toString() +
+                etHphmReport.getText().toString());
+        wfjb.setWfxw(tvWfxwReport.getText().toString());//违法行为
+        wfjb.setWfsj(tvTimeReport.getText().toString());//违法时间
+        wfjb.setWfdd(etPlaceReport.getText().toString());//违法地点
+        wfjb.setXsfx(tvXsfxReport.getText().toString());//行驶方向
+        wfjb.setCllx(tvCllxReport.getText().toString());//车辆类型
+        wfjb.setCsys(tvCsysReport.getText().toString());//车声颜色
+        wfjb.setXxms(etBcsmReport.getText().toString());//补充说明
+        //  wfjb.setTplj(String.format("s%,s%,s%"));违法图片
+        wfjb.setJbrxm(etNameReport.getText().toString());//举报人姓名
+        wfjb.setLxdh(etPhoneReport.getText().toString());//手机号码
+        wfjb.setSfzh(etCardReport.getText().toString());//身份证号码
+        wfjb.setZqdw(tvUnitsReport.getText().toString());//执勤单位
+
+       /* String wfch = tvFzjgReport.getText().toString()
                 + tvHpzlReport.getText().toString()
                 + etHphmReport.getText().toString();//违法车牌号
-        String qksm = tvWfxwReport.getText().toString();//情况记录
+        //String qksm = tvWfxwReport.getText().toString();//情况记录
         String name = etNameReport.getText().toString();//举报人
         String idCard = etCardReport.getText().toString();//身份证
         String phone = etPhoneReport.getText().toString();//联系电话
-        String snits = tvUnitsReport.getText().toString();//执勤单位
+        String snits = tvUnitsReport.getText().toString();//执勤单位*/
         files = new ArrayList<>();
         files.add(new File(uploadFiles[0]));
         if (uploadFiles[1] != null && uploadFiles[1].length() > 0) {
@@ -344,23 +354,23 @@ public class ReportActivity extends BaseActivity {
             files.add(new File(uploadFiles[2]));
         }
         //判断是否有值
-        if (TextUtils.isEmpty(place)) {
+        if (TextUtils.isEmpty(etPlaceReport.getText().toString())) {
             Toast.makeText(this, "请记录违法地点!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(wfch)) {
+        if (TextUtils.isEmpty(etHphmReport.getText().toString())) {
             Toast.makeText(this, "请记录违法车牌号!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(name)) {
+        if (TextUtils.isEmpty(etNameReport.getText().toString())) {
             Toast.makeText(this, "请记录举报人名字!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(idCard)) {
+        if (TextUtils.isEmpty(etCardReport.getText().toString())) {
             Toast.makeText(this, "请记录举报人身份号码!", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(phone)) {
+        if (TextUtils.isEmpty(etPhoneReport.getText().toString())) {
             Toast.makeText(this, "请记录举报人电话号码!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -368,24 +378,30 @@ public class ReportActivity extends BaseActivity {
             Toast.makeText(this, "请选择两张照片!", Toast.LENGTH_SHORT).show();
             return;
         }
-        //Person person = new Person(null, name, sex);
-        cstp_wfjb wfjbData = new cstp_wfjb(null,"mark",time,place,wfch,qksm,name,
-                idCard,phone,snits,uploadFiles[0],uploadFiles[1],uploadFiles[2]);
+       /* //Person person = new Person(null, name, sex);
+        cstp_wfjb wfjbData = new cstp_wfjb(null, "mark", time, place, wfch, qksm, name,
+                idCard, phone, snits, uploadFiles[0], uploadFiles[1], uploadFiles[2]);
         //数据库操作
-        initSQLite(wfjbData);
+        initSQLite(wfjbData);*/
 
         HttpParams params = new HttpParams();
-        params.put("wfsj", time);//违法时间
-        params.put("wfld", place);//违法路段
-        params.put("wfch", wfch);//违法车牌号码
-        params.put("qksm", qksm);//情况记录
-        params.put("jbr", name);//举报人
-        params.put("sfhm", idCard);//身份号码
-        params.put("lxdh", phone);//联系电话
-        params.put("zqdw", snits);//执勤单位
-        params.putFileParams("image", files);//上传多个文件
+        params.put("fzjg", wfjb.getFzjg()); //发证机关
+        params.put("hphm", wfjb.getHphm()); //号牌号码
+        params.put("wfxw", wfjb.getWfxw());  //违法行为
+        params.put("wfsj", wfjb.getWfsj());  //违法时间
+        params.put("wfdd", wfjb.getWfdd()); //违法地点
+        params.put("xsfx", wfjb.getXsfx()); //行驶方向
+        params.put("cllx", wfjb.getCllx());  //车辆类型
+        params.put("csys", wfjb.getCsys());  //车身颜色
+        params.put("xxms", wfjb.getXxms());  //补充说明
+        params.put("tplj", wfjb.getTplj()); //违法图片,文件路径
+        params.put("jbrxm", wfjb.getJbrxm());  //举报人姓名
+        params.put("lxdh", wfjb.getLxdh());//手机号码
+        params.put("sfzh", wfjb.getSfzh());  //身份证号码
+        params.put("zqdw", wfjb.getZqdw()); //执勤单位
+        //params.putFileParams("image", files);//上传多个文件
 
-        OkHttpUtils.post(GlobalApp.BASE_URL)
+        OkHttpUtils.post(GlobalApp.WFJB_URL)
                 .addFileParams("image", files)//
                 .params(params)
                 .execute(new StringCallback() {
@@ -413,14 +429,15 @@ public class ReportActivity extends BaseActivity {
 
                     @Override
                     public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
-                        Log.v("ReportActivity", "onError:" + e.toString());
                         super.onError(isFromCache, call, response, e);
+                        Log.v("ReportActivity", "onError:" + response.toString());
+                        Log.v("ReportActivity", "onError:" + e.getMessage());
                     }
                 });
 
     }
 
-    private void initSQLite(cstp_wfjb wfjbData) {
+ /*   private void initSQLite(cstp_wfjb wfjbData) {
         mHelper = new DaoMaster.DevOpenHelper(this, "test-db", null);
         db = mHelper.getWritableDatabase();
         mDaoMaster = new DaoMaster(db);
@@ -431,9 +448,9 @@ public class ReportActivity extends BaseActivity {
         //添加数据
 
         // 通过 insert 方法向数据库中添加数据，因为设置了 id 为主键，所以这里 id 填 null
-      long l=  mWfjbDao.insert(wfjbData);
-        Log.v("ReportActivity","SQLite添加成功"+l+"");
-    }
+        long l = mWfjbDao.insert(wfjbData);
+        Log.v("ReportActivity", "SQLite添加成功" + l + "");
+    }*/
 
     private void startImage(int i) {
         position = i;
@@ -477,7 +494,7 @@ public class ReportActivity extends BaseActivity {
                                 Uri imageUri = Uri.fromFile(file);
                                 // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
 
-                               // Glide.
+                                // Glide.
                                 openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
                                 startActivityForResult(openCameraIntent, TAKE_PHOTO);
                                 break;
@@ -501,7 +518,7 @@ public class ReportActivity extends BaseActivity {
                 case TAKE_PHOTO:
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
                     //水印
-                    Bitmap bmp =ImageTools.zoomBitmap(bitmap,320,480);
+                    Bitmap bmp = ImageTools.zoomBitmap(bitmap, 320, 480);
                     bitmap.recycle();
                     bitmap = ImageTools.createWatermark(bmp, MD5.md5(tvTimeReport.getText().toString()));
 

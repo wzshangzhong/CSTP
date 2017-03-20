@@ -85,7 +85,7 @@ public class LoginActivity extends BaseActivity {
 
     private void NetPost() {
         OkHttpUtils
-                .post(GlobalApp.BASE_URL)
+                .post(GlobalApp.USER_URL)
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                  .postJson("{'code':'2','msg':{'yhm':'" + username + "','password':'" + password + "'}}")
                 //.postJson("{'code':'2','msg':{'yhm':'1111','password':'1234'}}")

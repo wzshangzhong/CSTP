@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.R;
-import com.android.wen.cstp.pojo.CSTPReportList;
 import com.android.wen.cstp.pojo.Version;
 import com.google.gson.Gson;
 import com.lzy.okhttputils.OkHttpUtils;
@@ -23,7 +22,6 @@ import com.lzy.okhttputils.callback.FileCallback;
 import com.lzy.okhttputils.callback.StringCallback;
 
 import java.io.File;
-import java.io.IOException;
 
 import okhttp3.Request;
 import okhttp3.Response;
@@ -40,7 +38,7 @@ public class VersionActivity extends AppCompatActivity {
         init();
         //获取app版本信息
 
-        OkHttpUtils.post(GlobalApp.BASE_URL + "appUrl").execute(new StringCallback() {
+        OkHttpUtils.post(GlobalApp.USER_URL + "appUrl").execute(new StringCallback() {
             @Override
             public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                 Gson gson = new Gson();

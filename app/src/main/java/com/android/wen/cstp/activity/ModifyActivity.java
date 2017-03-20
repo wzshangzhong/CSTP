@@ -266,7 +266,7 @@ public class ModifyActivity extends AppCompatActivity {
 
         final Gson gson = new Gson();
         Log.v("RegisterActivity is User", "{'code':'1','msg':{user:" + gson.toJson(user) + "}}");
-        OkHttpUtils.post(GlobalApp.BASE_URL)
+        OkHttpUtils.post(GlobalApp.USER_URL)
                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
                 .postJson("{'code':'1','msg':{user:" + gson.toJson(user) + "}}")
                 .execute(new StringCallback() {

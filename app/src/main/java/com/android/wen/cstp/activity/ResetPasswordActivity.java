@@ -98,7 +98,7 @@ public class ResetPasswordActivity extends BaseActivity {
             Toast.makeText(this, "两次密码不相同", Toast.LENGTH_SHORT).show();
         } else {
             OkHttpUtils
-                    .post(GlobalApp.BASE_URL)
+                    .post(GlobalApp.USER_URL)
                     .mediaType(MediaType.parse("application/json; charset=utf-8"))
                     .postJson("{'code':'4','msg':{'yhm':'" + username + "','password':'" + password + "'}}")
                     .execute(new StringCallback() {
