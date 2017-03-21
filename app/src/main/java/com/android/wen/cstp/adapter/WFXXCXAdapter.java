@@ -65,10 +65,17 @@ public class WFXXCXAdapter extends BaseAdapter {
         holder.tvWfdate = (TextView) view.findViewById(R.id.tv_WFSJ);
         holder.llReportsTime = (LinearLayout) view.findViewById(R.id.ll_reports_time);
         holder.tvReportsTime = (TextView) view.findViewById(R.id.tv_reports_time);
-
+        if(reportsTime.equals(wfjb.getWfsj())){
+            holder.llReportsTime.setVisibility(View.GONE);
+        }else {
+            reportsTime=wfjb.getWfsj();
+            holder.llReportsTime.setVisibility(View.VISIBLE);
+            holder.tvReportsTime.setText(reportsTime);
+        }
         holder.tvId.setText(String.valueOf(i + 1 + ""));
         holder.tvNumber.setText(wfjb.getFzjg().substring(0, 1) + wfjb.getHphm());
-       // holder.tvWfdate.setText(wfjb.getWfsj());
+        holder.tvWfdate.setText(wfjb.getWfsj());
+        Log.v("WFXXCXAdapter wfjb",wfjb.getWfsj());
         Log.v("WFXXCXAdapter",wfjb.toString());
         if (reportsTime.equals(wfjb.getWfsj())) {
             holder.llReportsTime.setVisibility(View.GONE);

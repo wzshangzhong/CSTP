@@ -19,7 +19,7 @@ import okhttp3.OkHttpClient;
 public class GlobalApp extends Application {
     //http://192.168.1.102/ 本机电脑测试
     //public static final String BASE_URL = "http://192.168.1.102:9068/CarInfo/";
-    public static final String BASE_URL = "http://192.168.0.113:8082/";
+    public static final String IMAGE_URL = "http://192.168.0.113:8082/App_Image/";
     public static final String USER_URL = "http://192.168.0.113:8082/api/user/post";
     public static final String WFJB_URL = "http://192.168.0.113:8082/api/wfxx/post";
     public static final String WFJBCX_URL = "http://192.168.0.113:8082/api/wfxxcx/post";

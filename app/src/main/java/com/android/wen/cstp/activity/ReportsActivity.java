@@ -148,8 +148,11 @@ public class ReportsActivity extends BaseActivity {
                         Log.v("ReportsActivity is NetData", "Response:" + response);
                         //json解析  转换为ArrayList集合
                         Gson gson = new Gson();
-                       ArrayList<WFJB> wfjbArrayList = gson.fromJson(s, new TypeToken<ArrayList<WFJB>>() {
+                        ArrayList<WFJB> wfjbArrayList = gson.fromJson(s, new TypeToken<ArrayList<WFJB>>() {
                         }.getType());
+                        for (WFJB wfjb : wfjbs) {
+                            Log.v("ReportsActivity",wfjb.toString());
+                        }
                         wfjbs.addAll(wfjbArrayList);
                         mWFXXCXAdapter.notifyDataSetChanged();
                         Log.v("ReportsActivity", "wfjbs length：" + wfjbs.size());

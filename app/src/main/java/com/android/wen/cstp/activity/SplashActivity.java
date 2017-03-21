@@ -39,7 +39,6 @@ import okhttp3.Response;
 public class SplashActivity extends BaseActivity {
     private final int SPLASH_DISPLAY_LENGHT = 3000; //延迟三秒
     private Class<?> cls = null;
-    private File apkFile;
     private int code;
     private String fileApkPath;
     private ProgressDialog mProgressDialog;
@@ -51,6 +50,8 @@ public class SplashActivity extends BaseActivity {
 
         View view = getLayoutInflater().inflate(R.layout.activity_splash, null);
         setContentView(view);
+
+        Log.v("SplashActivity ", "asfasfasdfasdfafda");
 
         // 渐变动画 (从模糊至清晰)
         AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
@@ -79,12 +80,11 @@ public class SplashActivity extends BaseActivity {
                             e.printStackTrace();
                         }
 
-
                         int versionCode = packInfo.versionCode;
 
                         OkHttpUtils.post(GlobalApp.USER_URL)
                                 .mediaType(MediaType.parse("application/json; charset=utf-8"))
-                                .postJson("{'code':'7','msg':{'version':'"+versionCode+"'}}")
+                                .postJson("{'code':'7','msg':{'version':'" + versionCode + "'}}")
                                 .execute(new StringCallback() {
                                     @Override
                                     public void onResponse(boolean isFromCache, String s, Request request,
@@ -93,12 +93,12 @@ public class SplashActivity extends BaseActivity {
                                             JSONObject jo = new JSONObject(s);
                                             code = Integer.valueOf(jo.getString("code"));
 
-                                            Log.v("SplashActivity is code:"," "+ code);
-                                            Log.v("SplashActivity is a:"," " + s);
-
+                                            Log.v("SplashActivity is code:", " " + code);
+                                            Log.v("SplashActivity is a:", " " + s);
                                             if (code > 0) {
                                                 UpDataApk();
                                             } else {
+                                                Log.v("SplashActivity ", "asfasfasdfasdfafda");
                                                 Intent intent = new Intent(SplashActivity.this, cls);
                                                 startActivity(intent);
                                                 SplashActivity.this.finish();
@@ -107,12 +107,8 @@ public class SplashActivity extends BaseActivity {
                                             e.printStackTrace();
                                         }
                                     }
-
                                 });
-
-
                     }
-
                     private void UpDataApk() {
                         ShowDialog();
                         OkHttpUtils
@@ -135,7 +131,7 @@ public class SplashActivity extends BaseActivity {
                                     public void downloadProgress(long currentSize, long totalSize, float progress, long networkSpeed) {
                                         super.downloadProgress(currentSize, totalSize, progress, networkSpeed);
 
-                                         mProgressDialog.setProgress((int) (100 * progress));
+                                        mProgressDialog.setProgress((int) (100 * progress));
                                         Log.v("SplashActivity is progress", String.valueOf(100 * progress));
                                         Log.v("SplashActivity is currentSize", String.valueOf(100 * currentSize));
                                         Log.v("SplashActivity is totalSize", String.valueOf(100 * totalSize));
@@ -151,8 +147,7 @@ public class SplashActivity extends BaseActivity {
                                 });
                     }
                 }, SPLASH_DISPLAY_LENGHT);
-
-
+        Log.v("SplashActivity ", "asfasfasdfasdfafda");
     }
 
     private void ShowDialog() {
@@ -176,19 +171,17 @@ public class SplashActivity extends BaseActivity {
                     FileInputStream fis = null;
                     try {
                         fis = new FileInputStream(file);
-                        Log.v("SplashActivity FileSize:",  fis.available()+"");
+                        Log.v("SplashActivity FileSize:", fis.available() + "");
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     installApk(file);
                     dialog.cancel();
                 }
             }
         });
-
         // 让ProgressDialog显示
         mProgressDialog.show();
     }
