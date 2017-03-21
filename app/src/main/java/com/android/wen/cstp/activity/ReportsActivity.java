@@ -12,57 +12,58 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.wen.cstp.GlobalApp;
 import com.android.wen.cstp.R;
 import com.android.wen.cstp.adapter.CSTPReportAdapter;
+import com.android.wen.cstp.adapter.WFXXCXAdapter;
 import com.android.wen.cstp.adapter.WfjbAdapter;
 import com.android.wen.cstp.base.BaseActivity;
 import com.android.wen.cstp.pojo.CSTPReportList;
 import com.android.wen.cstp.pojo.CstpWfjb;
 import com.android.wen.cstp.pojo.WFJB;
 import com.android.wen.cstp.util.ComparableUtil;
+import com.android.wen.cstp.util.NetWorkTool;
+import com.android.wen.cstp.util.UserUtils;
 import com.android.wen.cstp.view.LoadDialog;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lzy.okhttputils.OkHttpUtils;
 import com.lzy.okhttputils.cache.CacheMode;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.sivan.greendaopractice.DaoMaster;
 import com.sivan.greendaopractice.DaoSession;
-import com.sivan.greendaopractice.cstp_wfjb;
 import com.sivan.greendaopractice.cstp_wfjbDao;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
-import de.greenrobot.dao.query.QueryBuilder;
+import butterknife.ButterKnife;
+
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /*举报别人的信息*/
 public class ReportsActivity extends BaseActivity {
-    private LoadDialog dialog;
+    private ListView mListView;
+    private WFXXCXAdapter mWFXXCXAdapter;
+    // private LoadDialog dialog;
     private RecyclerView rvItemReports;
     private CSTPReportAdapter mCSTPReportAdapter;
     private ArrayList<WFJB> wfjbs;
+    private WFJB wfjb;
     private CSTPReportList mCSTPReportList;//网络数据
     private ArrayList<CSTPReportList.DataBean> dataBeenList;//需要显示的数据
 
     //下拉刷新的
     private SwipeRefreshLayout swipeRefreshLayout;
 
-
-    private DaoMaster.DevOpenHelper mHelper;
-    private SQLiteDatabase db;
-    private DaoSession mDaoSession;
-    private DaoMaster mDaoMaster;
-    private cstp_wfjbDao mWfjbDao;
-    private Cursor cursor;
 
     //这是添加数据库数据
     private ArrayList<CstpWfjb> cstpWfjbs;
@@ -71,10 +72,11 @@ public class ReportsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ButterKnife.bind(this);
         setContentView(R.layout.activity_reports);
         initView();
         //获取数据库数据
-        postData();
+        NetData();
     }
 
     private void initView() {
@@ -90,23 +92,131 @@ public class ReportsActivity extends BaseActivity {
         tvTop.setText("举报信息查询");
         TextView topSearch = (TextView) findViewById(R.id.top_search);
         topSearch.setVisibility(View.VISIBLE);
-        topSearch.setOnClickListener(new View.OnClickListener() {
+      /*  topSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (dataBeenList.size() <= 0) {
-                    Toast.makeText(ReportsActivity.this, "暂无违法举报数据", Toast.LENGTH_SHORT).show();
+                if (wfjbs.size() <= 0) {
+                    // Toast.makeText(ReportsActivity.this, "暂无违法举报数据", Toast.LENGTH_SHORT).show();
+                    UserUtils.showToast(ReportsActivity.this, "暂无违法举报数据");
                     return;
                 }
                 //传递集合
                 Intent intent = new Intent(ReportsActivity.this, ReportsSearchActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putSerializable("wfjbs", wfjbs);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+              *//*  //传递集合
+                Intent intent = new Intent(ReportsActivity.this, ReportsSearchActivity.class);
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("dataBeenList", dataBeenList);
+                intent.putExtras(bundle);
+                startActivity(intent);*//*
+            }
+        });*/
+        wfjbs = new ArrayList<>();
+        mListView = (ListView) findViewById(R.id.lv_item_reports);
+        mWFXXCXAdapter = new WFXXCXAdapter(ReportsActivity.this, wfjbs);
+        mListView.setAdapter(mWFXXCXAdapter);
+
+        // mWFXXCXAdapter.notifyDataSetChanged();
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                wfjb = wfjbs.get(i);
+                Intent intent = new Intent(ReportsActivity.this, ItemReportActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("wfjb_reports", wfjb);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });}
+        });
 
-    private void postData() {
+    }
+
+    private void NetData() {
+        OkHttpUtils.post(GlobalApp.WFJBCX_URL)
+                .postJson("{'jbrxm':'" + UserUtils.getUser(ReportsActivity.this).getXm() + "'}")
+                .cacheKey("WFJBCX")//添加缓存,可能是从缓存中读取值
+                .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)//貌似要选缓存模式
+                .execute(new StringCallback() {
+                    @Override
+                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
+                        Log.v("ReportsActivity is NetData", "s:" + s);
+                        Log.v("ReportsActivity is NetData", "Request:" + request);
+                        Log.v("ReportsActivity is NetData", "Response:" + response);
+                        //json解析  转换为ArrayList集合
+                        Gson gson = new Gson();
+                       ArrayList<WFJB> wfjbArrayList = gson.fromJson(s, new TypeToken<ArrayList<WFJB>>() {
+                        }.getType());
+                        wfjbs.addAll(wfjbArrayList);
+                        mWFXXCXAdapter.notifyDataSetChanged();
+                        Log.v("ReportsActivity", "wfjbs length：" + wfjbs.size());
+                        //按照时间排序
+                        ComparableUtil sort = new ComparableUtil();
+                        Collections.sort(wfjbs, sort);
+                        //数据添加至显示集合
+//                        int netDataSize = mCSTPReportList.getData().size();//网络加载数据长度
+                        //                      int viewDataSize = dataBeenList.size();//显示数据长度
+                        /*for (int i = 0; i < mCSTPReportList.getData().size(); i++) {
+                            dataBeenList.add(mCSTPReportList.getData().get(i));
+                            Log.e("ReportsActivity", "违法时间：" + dataBeenList.get(i).getWFSJ());
+                            mCSTPReportAdapter.notifyDataSetChanged();
+                        }*/
+                        //缓存集合
+                        if (isFromCache) {
+                            //缓存了
+                            Log.e("ReportsActivity", "isFromCache:" + isFromCache);
+                        } else {
+                            //有网不需要缓存
+                            Log.e("ReportsActivity", "isFromCache:" + isFromCache);
+                        }
+
+                        //关掉下拉刷新
+//                        swipeRefreshLayout.setRefreshing(false);
+                        Log.e("ReportsActivity", "获取集合长度：" + wfjbs.size());
+                        Log.e("ReportActivity", s + "");
+
+
+                        if (!wfjbs.isEmpty()) {
+                            // Toast.makeText(ReportsActivity.this, "加载成功", Toast.LENGTH_SHORT).show();
+                            UserUtils.showToast(ReportsActivity.this, "加载成功");
+                        } else {
+                            UserUtils.showToast(ReportsActivity.this, "加载失败");
+                            //Toast.makeText(ReportsActivity.this, "加载失败", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onAfter(boolean isFromCache, @Nullable String s, Call call, @Nullable Response response, @Nullable Exception e) {
+                        // dialog.dismiss();
+                        //tvRecordReports.setText("");
+                        Log.v("ReportsActivity", s + "");
+                        super.onAfter(isFromCache, s, call, response, e);
+                    }
+
+                    @Override
+                    public void onError(boolean isFromCache, Call call,
+                                        @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
+                        Log.v("ReportsActivity is NetData", "Exception:" + e);
+                        Log.v("ReportsActivity is NetData", "Response:" + response);
+                        //获取数据库数据
+                        //*   DaoGenerator daoGenerator = new DaoGenerator(ReportsActivity.this);
+                        //cstpReportList = daoGenerator.search();
+                        // mCSTPReportAdapter.notifyDataSetChanged();*//*
+//                        dialog.dismiss();
+
+
+                    }
+                });
+
+    }
+
+   /* private void postData() {
         OkHttpUtils.get(GlobalApp.USER_URL + "getCarInfo")
                 .cacheKey("getCarInfo")//添加缓存,可能是从缓存中读取值
                 .cacheMode(CacheMode.REQUEST_FAILED_READ_CACHE)//貌似要选缓存模式
@@ -163,16 +273,16 @@ public class ReportsActivity extends BaseActivity {
                     @Override
                     public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
                         //获取数据库数据
-                     /*   DaoGenerator daoGenerator = new DaoGenerator(ReportsActivity.this);
+                     *//*   DaoGenerator daoGenerator = new DaoGenerator(ReportsActivity.this);
                         cstpReportList = daoGenerator.search();
-                        mCSTPReportAdapter.notifyDataSetChanged();*/
+                        mCSTPReportAdapter.notifyDataSetChanged();*//*
                         dialog.dismiss();
                         super.onError(isFromCache, call, response, e);
 
                     }
                 });
 
-    }
+    }*/
 
 
      /*  *//* //刷新加载
@@ -259,7 +369,6 @@ public class ReportsActivity extends BaseActivity {
 
 
     }*/
-
 
 
     /**

@@ -1,8 +1,7 @@
 package com.android.wen.cstp.util;
 
 import android.util.Log;
-
-import com.android.wen.cstp.pojo.CSTPReportList;
+import com.android.wen.cstp.pojo.WFJB;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,11 +16,11 @@ public class ComparableUtil implements Comparator {
     SimpleDateFormat sdf1 = new SimpleDateFormat("HHmmss");
     SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMdd");
 
-    private Integer getWfsj1(CSTPReportList.DataBean m) {
-        if (m == null || m.getWFSJ() == null)
+    private Integer getWfsj1(WFJB m) {
+        if (m == null || m.getWfsj() == null)
             return null;
         try {
-            Date date = sdf0.parse(m.getWFSJ());
+            Date date = sdf0.parse(m.getWfsj());
             String str = sdf2.format(date);
             Integer i = Integer.valueOf(str);
             return i;
@@ -30,11 +29,11 @@ public class ComparableUtil implements Comparator {
         }
     }
 
-    private Integer getWfsj2(CSTPReportList.DataBean m) {
-        if (m == null || m.getWFSJ() == null)
+    private Integer getWfsj2(WFJB wfjb) {
+        if (wfjb == null || wfjb.getWfsj() == null)
             return null;
         try {
-            Date date = sdf0.parse(m.getWFSJ());
+            Date date = sdf0.parse(wfjb.getWfsj());
             String str = sdf1.format(date);
             Integer i = Integer.valueOf(str);
             return i;
@@ -47,8 +46,8 @@ public class ComparableUtil implements Comparator {
     public int compare(Object o1, Object o2) {
         Log.e("ComparableUtil", "compare: 进行排序");
         //先比较年月日
-        Integer d1 = getWfsj1((CSTPReportList.DataBean) o1);
-        Integer d2 = getWfsj1((CSTPReportList.DataBean) o2);
+        Integer d1 = getWfsj1((WFJB) o1);
+        Integer d2 = getWfsj1((WFJB) o2);
         if (d1 == null && d2 == null)
             return 0;
         if (d1 == null)
@@ -56,8 +55,8 @@ public class ComparableUtil implements Comparator {
         if (d2 == null)
             return 1;
         if (d1.equals(d2)) {//年月日相等时 则处理时分秒
-            Integer d3 = getWfsj2((CSTPReportList.DataBean) o1);
-            Integer d4 = getWfsj2((CSTPReportList.DataBean) o2);
+            Integer d3 = getWfsj2((WFJB) o1);
+            Integer d4 = getWfsj2((WFJB) o2);
             if (d3 == null && d4 == null)
                 return 0;
             if (d3 == null)
